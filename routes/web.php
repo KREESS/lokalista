@@ -22,6 +22,7 @@ use App\Http\Controllers\Superadmin\LaporanPenjualanSuperAdminController;
 use App\Http\Controllers\Superadmin\SuperAdminUserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +120,9 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
 
     Route::get('/customer/chat', [ChatCustomerController::class, 'index'])->name('customer.chat');
     Route::post('/customer/chat', [ChatCustomerController::class, 'send'])->name('customer.post_chat');
+
+
+    // PAYMENT OTOMATIS DENGAN MENGGUNAKAN MIDTRANS
 });
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

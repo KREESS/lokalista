@@ -508,9 +508,9 @@
                                         .then(data => {
                                             if (data.qr) {
                                                 document.getElementById('qris-code').innerHTML = `
-            <img src="${data.qr}" alt="QR Code Pembayaran" style="max-width: 300px;">
-            <p id="qris-expired" style="margin-top: 10px; font-weight: bold; color: red;"></p>
-        `;
+                                                        <img src="${data.qr}" alt="QR Code Pembayaran" style="max-width: 300px;">
+                                                        <p id="qris-expired" style="margin-top: 10px; font-weight: bold; color: red;"></p>
+                                                    `;
 
                                                 // ✅ Sembunyikan tombol bayar sekarang
                                                 document.getElementById("pay-btn").style.display = "none";
@@ -574,55 +574,6 @@
                                     }
                                 });
                             </script>
-
-
-
-                            {{-- <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">Rekening Pembayaran</h4>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                            <!--end card-header-->
-                            <div class="card-body">
-                                @foreach ($rekening as $rekening)
-                                    <div class="row no-gutters">
-                                        <div class="col-md-3 align-self-center text-center">
-                                            @if ($rekening->jenis_rekening == 'bni')
-                                                <img class="" height="50" src="/rekening/BNI.jpg"
-                                                    alt="Card image">
-                                            @elseif ($rekening->jenis_rekening == 'bri')
-                                                <img class="" height="50" src="/rekening/bri.png"
-                                                    alt="Card image">
-                                            @elseif ($rekening->jenis_rekening == 'bsi')
-                                                <img class="" height="50" src="/rekening/bsi.jpg"
-                                                    alt="Card image">
-                                            @elseif ($rekening->jenis_rekening == 'bca')
-                                                <img class="" height="50" src="/rekening/bca.png"
-                                                    alt="Card image">
-                                            @elseif ($rekening->jenis_rekening == 'mandiri')
-                                                <img class="" height="50" src="/rekening/mandiri.png"
-                                                    alt="Card image">
-                                            @endif
-
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                    Nama Rekening : <b> {{ Str::title($rekening->nama_rek) }} </b><br>
-                                                    Nomor Rekening : <b> {{ $rekening->no_rek }} </b>
-                                                </p>
-                                            </div>
-                                            <!--end card-body-->
-                                        </div>
-                                        <hr>
-                                        <!--end col-->
-                                    </div>
-                                @endforeach
-                            </div> --}}
                             <!--end card-body-->
                         </div>
                         <!--end card-->
