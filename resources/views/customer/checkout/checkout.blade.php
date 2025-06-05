@@ -58,7 +58,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Sekilas Pesanan coba</h4>
+                                <h4 class="card-title">Sekilas Pesanan</h4>
                             </div>
                             <!--end col-->
                         </div>
