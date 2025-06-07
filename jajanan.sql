@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2025 at 10:07 AM
+-- Generation Time: Jun 07, 2025 at 06:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,7 +50,8 @@ INSERT INTO `alamat_user` (`id_alamat`, `id_user`, `no_telp`, `nama_penerima`, `
 (3, 2, '08117807970', 'Ari Dwiantoro', 33, 'Sumatera Selatan', 327, 'Palembang', '30151', 'jl. Suka bangun 2', '2022-11-07 18:32:21', '2022-11-07 18:32:21'),
 (4, 3, '081218113193', 'tere', 32, 'Sumatera Barat', 318, 'Padang', '30151', 'jl. suka bangun', '2022-11-20 14:36:01', '2022-11-20 14:36:01'),
 (5, 4, '098765432123', 'MOHAMAD AZHAR SYAH', 9, 'Jawa Barat', 109, 'Cirebon', '2123', 'rumah', '2024-04-10 10:35:05', '2024-04-10 10:35:05'),
-(6, 8, '08888888888888', 'himatif', 1, 'Bali', 17, 'Badung', '44444', 'pppppppppppppppppp', '2024-09-23 06:42:10', '2024-09-23 06:42:10');
+(6, 8, '08888888888888', 'himatif', 1, 'Bali', 17, 'Badung', '44444', 'pppppppppppppppppp', '2024-09-23 06:42:10', '2024-09-23 06:42:10'),
+(7, 10, '0837643284238', 'Aditya Putra Sholahuddin', 2, 'Jawa Barat', 202, 'Bekasi', '17510', 'melati raya', '2025-05-27 13:54:49', '2025-05-27 13:54:49');
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,8 @@ CREATE TABLE `keranjang` (
 
 INSERT INTO `keranjang` (`id_keranjang`, `id_user`, `id_produk`, `quantity`, `created_at`, `updated_at`) VALUES
 (14, 7, 4, 4, '2024-09-18 03:10:49', '2024-09-18 03:10:56'),
-(15, 8, 4, 1, '2024-09-23 06:39:41', '2024-09-23 06:39:41');
+(15, 8, 4, 1, '2024-09-23 06:39:41', '2024-09-23 06:39:41'),
+(16, 10, 4, 9, '2025-05-27 13:54:00', '2025-06-06 20:26:55');
 
 -- --------------------------------------------------------
 
@@ -217,7 +219,7 @@ CREATE TABLE `pesanan` (
   `id_user` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `harga_total_bayar` int(11) NOT NULL,
-  `ongkir` int(11) NOT NULL,
+  `ongkir` int(11) DEFAULT NULL,
   `total_ongkir` int(11) NOT NULL,
   `bukti_bayar` text DEFAULT NULL,
   `total_dp` bigint(20) DEFAULT NULL,
@@ -235,7 +237,8 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `id_produk`, `id_user`, `quantity`, `harga_total_bayar`, `ongkir`, `total_ongkir`, `bukti_bayar`, `total_dp`, `bukti_bayar_dp`, `bukti_bayar_dp_lunas`, `dp_status`, `status`, `tipe_pembayaran`, `created_at`, `updated_at`) VALUES
-(5, 4, 4, 1, 10000, 19000, 29000, 'Screenshot 2024-04-07 225024.png', NULL, NULL, NULL, NULL, '3', 'lunas', '2024-04-10 10:44:11', '2024-04-14 13:54:25');
+(5, 4, 4, 1, 10000, 19000, 29000, 'Screenshot 2024-04-07 225024.png', NULL, NULL, NULL, NULL, '3', 'lunas', '2024-04-10 10:44:11', '2024-04-14 13:54:25'),
+(39, 4, 10, 9, 927000, NULL, 837000, NULL, NULL, NULL, NULL, NULL, 'lunas', 'credit_card', '2025-06-07 00:24:42', '2025-06-07 00:25:22');
 
 -- --------------------------------------------------------
 
@@ -335,7 +338,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `foto_profile`, `hp`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin anita', 'admin@admin.com', '2022-11-05 07:44:53', '$2y$10$aDJc9xYb11Udc98ri0GYuehzI8XrpiOV2lMgr3Je7/2d3xRSHoRpm', 'admin', 'images (1).jpeg', '081218113193', 'SPivNm5NfAOSxdIaCs13BgBh2nrMnboLw5dQVB7McNXg3dtFqr9vrgL7TiCv', '2022-11-05 07:44:53', '2025-03-12 15:29:49'),
+(1, 'admin anita', 'admin@admin.com', '2022-11-05 07:44:53', '$2y$10$aDJc9xYb11Udc98ri0GYuehzI8XrpiOV2lMgr3Je7/2d3xRSHoRpm', 'admin', 'images (1).jpeg', '081218113193', '7jnMWKOEyc9l4Rrj0wPTBLBFa0O9xus17HZuuXPxD3OQidUtUiZnLvJpn1Tw', '2022-11-05 07:44:53', '2025-03-12 15:29:49'),
 (2, 'ari dwiantoro', 'aridwiantoro09@gmail.com', NULL, '$2y$10$P5fnR9z1t000WTyB6hUfcufzLZ6cuyJi7XIhpAmIAPf/UyMgqakdm', 'customer', NULL, '08117807970', NULL, '2022-11-07 06:47:02', '2022-11-07 06:48:45'),
 (3, 'tere', 'tere@tere.com', NULL, '$2y$10$Yv70.czYAJsd5F0in9J.fOKPOp9w6gRS1eGboiGqVnhJ5DxVvH1J6', 'customer', NULL, NULL, NULL, '2022-11-08 06:35:18', '2022-11-08 06:35:18'),
 (4, 'azhar', 'azharsyah@gmail.com', NULL, '$2y$10$O3YFuEMZo16vAogyzNccr.7v6pxSE3lPXgbHPdRyKnxC7m2.mTqYG', 'customer', NULL, NULL, NULL, '2024-04-10 10:30:11', '2024-04-10 10:30:11'),
@@ -343,7 +346,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 (6, 'anonymous', 'curug@gmail.com', NULL, '$2y$10$HhiMNz.kzaxuexBZYXfYWuoS89FUoJTYhj8aJVtsGJuL2sit6hyUW', 'customer', NULL, NULL, NULL, '2024-06-19 15:55:07', '2024-06-19 15:55:07'),
 (7, 'Azharsyah', 'ajaykhan@gmail.com', NULL, '$2y$10$87n3XxVPXOWBe4RGxfOE3uxa93QrKoAZhISdZGJp6bWlB7U5O93hC', 'customer', NULL, NULL, NULL, '2024-09-18 03:10:29', '2024-09-18 03:10:29'),
 (8, 'Armin', 'Armin@gmail.com', NULL, '$2y$10$6YEZyY4QBh/bIYXa7PVNOOUFIHOlT0ri7W7NYQfq1kHvRFVOMbpti', 'customer', NULL, NULL, NULL, '2024-09-23 06:39:23', '2024-09-23 06:39:23'),
-(9, 'Jony', 'jony@gmail.com', NULL, '$2y$10$K2zvtvlNa086Xk8bIOIYKutgFS9VRqwI8zqpu7XlTFMRvnPno3Eaa', 'customer', NULL, NULL, NULL, '2025-04-10 07:56:05', '2025-04-10 07:56:05');
+(9, 'Jony', 'jony@gmail.com', NULL, '$2y$10$K2zvtvlNa086Xk8bIOIYKutgFS9VRqwI8zqpu7XlTFMRvnPno3Eaa', 'customer', NULL, NULL, NULL, '2025-04-10 07:56:05', '2025-04-10 07:56:05'),
+(10, 'Aditya Putra Sholahuddin', 'adityasholahuddin@gmail.com', NULL, '$2y$10$KWBG7kkitlQjC/v4JIe1TOj6bLcW0.YMlPc6dJdLS3CE5Yi95YEJ2', 'customer', NULL, NULL, NULL, '2025-05-27 13:53:48', '2025-05-27 13:53:48');
 
 --
 -- Indexes for dumped tables
@@ -438,7 +442,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alamat_user`
 --
 ALTER TABLE `alamat_user`
-  MODIFY `id_alamat` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_alamat` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -456,7 +460,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_keranjang` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -480,7 +484,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -504,7 +508,7 @@ ALTER TABLE `resi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

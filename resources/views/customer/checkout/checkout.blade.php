@@ -276,27 +276,24 @@
                     </div>
                     <!--end card-body-->
                 </div>
+                {{-- Update Midtrans --}}
                 <!--end card-->
-<form method="POST" action="{{ route('checkout.proses') }}" id="formCheckout">
-    @csrf
+                <form method="POST" action="{{ route('checkout.proses') }}" id="formCheckout">
+                    @csrf
 
-    <!-- Data dinamis dari keranjang -->
-    @foreach ($keranjang as $item)
-        <input type="hidden" name="id_produk[]" value="{{ $item['id_produk'] }}">
-        <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">
-    @endforeach
+                    <!-- Data dinamis dari keranjang -->
+                    @foreach ($keranjang as $item)
+                        <input type="hidden" name="id_produk[]" value="{{ $item['id_produk'] }}">
+                        <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">
+                    @endforeach
 
-    <!-- Data tetap -->
-    <input type="hidden" name="total_bayar" value="{{ $total_bayar }}">
-    <input type="hidden" name="ongkir" value="{{ $harga_ongkir }}">
+                    <!-- Data tetap -->
+                    <input type="hidden" name="total_bayar" value="{{ $total_bayar }}">
+                    <input type="hidden" name="ongkir" value="{{ $harga_ongkir }}">
 
-    <!-- Tombol Bayar -->
-    <button type="submit" class="btn btn-warning mt-3" id="pay-button">Bayar Sekarang</button>
-</form>
-
-
-
-
+                    <!-- Tombol Bayar -->
+                    <button type="submit" class="btn btn-warning mt-3" id="pay-button">Bayar Sekarang</button>
+                </form>
                             <!--end card-body-->
                         </div>
                         <!--end card-->
