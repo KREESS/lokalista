@@ -21,6 +21,7 @@ use App\Http\Controllers\Superadmin\ProfileSuperAdminController;
 use App\Http\Controllers\Superadmin\LaporanPenjualanSuperAdminController;
 use App\Http\Controllers\Superadmin\SuperAdminUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,6 +124,10 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
 
 
     // PAYMENT OTOMATIS DENGAN MENGGUNAKAN MIDTRANS
+    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::post('/midtrans/callback', [PaymentController::class, 'handleMidtransCallback']);
+    Route::post('/checkout/proses', [PaymentController::class, 'proses'])->name('checkout.proses');
+    Route::any('/checkout/sukses', [PaymentController::class, 'updateStatusPembayaran'])->name('checkout.sukses');
 });
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

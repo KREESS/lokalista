@@ -68,12 +68,10 @@ class CheckoutCustomerController extends Controller
         $id_kota = $pengiriman->id_kota;
         $ongkir = $this->get_ongkir($id_kota, $berat_total);
 
-        $rekening = Rekening::orderBy('jenis_rekening', 'asc')->get();
-
         // Ambil pesanan terakhir user (jika ada)
         $pesanan = Pesanan::where('id_user', $userId)->latest()->first();
 
-        return view('customer.checkout.checkout', compact('keranjang', 'ongkir', 'berat_total', 'pengiriman', 'rekening', 'pesanan'));
+        return view('customer.checkout.checkout', compact('keranjang', 'ongkir', 'berat_total', 'pengiriman', 'pesanan'));
     }
 
     // CONTROLLER AWAL DIBAWAH
