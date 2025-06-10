@@ -124,7 +124,24 @@
             </a>
         </div>
     </li> --}}
+    <style>
+        .navigation-menu .nav-link span,
+        .navigation-menu .nav-link i {
+            color: #fff !important;
+            background-color: #ff7700;
+        }
+    
+        .menu-item .{
+            background-color: #ff7700;
+        }
+    
+        .navigation-menu {
+            background-color: #ff7700;
+            border: none;
+        }
+    </style>
 
+    
     <li class="dropdown">
         <a class="nav-link font-14" href="{{ route('login') }}">
             <span><i class="ti ti-user menu-icon"></i>Masuk</span>
@@ -149,6 +166,12 @@
     <div id="navigation">
         <!-- Navigation Menu-->
         <ul class="navigation-menu">
+            <li class="nav-item dropdown parent-menu-item">
+                <a class="nav-link" href="/">
+                    <span><i class="ti ti-smart-home menu-icon"></i>Home</span>
+                </a>
+
+            </li>
             <li class="nav-item dropdown parent-menu-item">
                 <a class="nav-link" href="{{ route('home.produk') }}">
                     <span><i class="ti ti-building-store menu-icon"></i>Produk</span>

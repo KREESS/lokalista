@@ -34,7 +34,7 @@ class PaymentController extends Controller
                 'id_user' => $idUser,
                 'quantity' => $quantities[$i],
                 'harga_total_bayar' => $request->total_bayar,
-                'ongkir' => null,
+                'ongkir' => $request->ongkir ?? 0, // <= solusi aman
                 'total_ongkir' => $request->ongkir,
                 'bukti_bayar' => null,
                 'total_dp' => null,
@@ -46,7 +46,7 @@ class PaymentController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-        }
+        }        
 
         // Simpan ke database
         DB::table('pesanan')->insert($pesananBaru);

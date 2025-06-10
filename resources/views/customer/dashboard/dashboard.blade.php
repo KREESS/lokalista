@@ -89,13 +89,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/dapuranita/img-1.jpg" class="d-block w-100" alt="...">
+                                    <img src="/lokalista/img-1.jpg" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/dapuranita/img-2.jpg" class="d-block w-100" alt="...">
+                                    <img src="/lokalista/img-2.jpg" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/dapuranita/img-3.jpg" class="d-block w-100" alt="...">
+                                    <img src="/lokalista/img-3.jpg" class="d-block w-100" alt="...">
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
@@ -244,43 +244,43 @@
           
         {{-- <div id="grid" class="row g-3">
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["craft"]'>
-                <a href="/dapuranita/kerajinan1.jpg" class="lightbox">
-                    <img src="/dapuranita/kerajinan1.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/kerajinan1.jpg" class="lightbox">
+                    <img src="/lokalista/kerajinan1.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/dapuranita/minuman1.jpeg" class="lightbox">
-                    <img src="/dapuranita/minuman1.jpeg" alt="" class="img-fluid" />
+                <a href="/lokalista/minuman1.jpeg" class="lightbox">
+                    <img src="/lokalista/minuman1.jpeg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["craft"]'>
-                <a href="/dapuranita/kerajinan2.jpg" class="lightbox">
-                    <img src="/dapuranita/kerajinan2.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/kerajinan2.jpg" class="lightbox">
+                    <img src="/lokalista/kerajinan2.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["food"]'>
-                <a href="/dapuranita/img-7.jpg" class="lightbox">
-                    <img src="/dapuranita/img-7.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/img-7.jpg" class="lightbox">
+                    <img src="/lokalista/img-7.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/dapuranita/minuman3.jpeg" class="lightbox">
-                    <img src="/dapuranita/minuman3.jpeg" alt="" class="img-fluid" />
+                <a href="/lokalista/minuman3.jpeg" class="lightbox">
+                    <img src="/lokalista/minuman3.jpeg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["health"]'>
-                <a href="/dapuranita/kesehatan.jpg" class="lightbox">
-                    <img src="/dapuranita/kesehatan1.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/kesehatan.jpg" class="lightbox">
+                    <img src="/lokalista/kesehatan1.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["food"]'>
-                <a href="/dapuranita/img-10.jpg" class="lightbox">
-                    <img src="/dapuranita/img-10.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/img-10.jpg" class="lightbox">
+                    <img src="/lokalista/img-10.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/dapuranita/minuman2.jpg" class="lightbox">
-                    <img src="/dapuranita/minuman2.jpg" alt="" class="img-fluid" />
+                <a href="/lokalista/minuman2.jpg" class="lightbox">
+                    <img src="/lokalista/minuman2.jpg" alt="" class="img-fluid" />
                 </a>
             </div>
         </div> --}}

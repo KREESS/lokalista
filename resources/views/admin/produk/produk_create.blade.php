@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <img id="output1" src="/dapuranita/default-produk.png" class="img-fluid" />
+                                        <img id="output1" src="/lokalista/default-produk.png" class="img-fluid" />
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="exampleInputEmail1">Upload Foto Produk</label>

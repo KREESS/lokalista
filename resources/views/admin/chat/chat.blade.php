@@ -50,7 +50,7 @@
                                         <img src="/foto_profile/{{ $chat->foto_profile }}" alt="profile-user"
                                             class="rounded-circle thumb-lg" />
                                     @else
-                                        <img src="/dapuranita/default.jpg" alt="profile-user"
+                                        <img src="/lokalista/default.jpg" alt="profile-user"
                                             class="rounded-circle thumb-lg" />
                                     @endif
                                     <div class="media-body ms-3 align-self-center">

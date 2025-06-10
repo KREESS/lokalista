@@ -12,7 +12,7 @@
 
     <!-- App favicon -->
     <title>Lokalista</title>
-    <link rel="shortcut icon" href="/dapuranita/LOGOoren.png">
+    <link rel="shortcut icon" href="/lokalista/LOGOoren.png">
     <!-- Favicon-->
     @yield('css')
 
@@ -39,7 +39,7 @@
         <!-- LOGO -->
             <a href="index.html" class="logo">
                 <span>
-                    <img src="/dapuranita/LOGOputih.png" alt="logo-small" style="background-color: #ff7700; height:60px; width:60px;">
+                    <img src="/lokalista/LOGOputih.png" alt="logo-small" style="background-color: #ff7700; height:60px; width:60px;">
                 </span>
             </a>
         <!--end logo-->

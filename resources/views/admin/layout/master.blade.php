@@ -12,7 +12,7 @@
 
     <!-- App favicon -->
     <title>Lokalista</title>
-    <link rel="shortcut icon" href="/dapuranita/logo1.png">
+    <link rel="shortcut icon" href="/lokalista/LOGOoren.png">
     <!-- Favicon-->
     @yield('css')
 
@@ -34,7 +34,7 @@
         <div class="brand">
             <a href="index.html" class="logo">
                 <span>
-                    <img src="/dapuranita/logo1.png" alt="logo-small" height="55" width="55">
+                    <img src="/lokalista/LOGOoren.png" alt="logo-small" height="55" width="55">
                 </span>
                 <span>
 
@@ -123,7 +123,7 @@
             document.write(new Date().getFullYear())
         </script> Metrica |
         <span class="text-muted d-none d-sm-inline-block float-end">Crafted with <i
-                class="mdi mdi-heart text-danger"></i> by Dapur Anita</span>
+                class="mdi mdi-heart text-danger"></i> by Lokalista</span>
     </footer>
     <!-- end Footer -->
     <!--end footer-->

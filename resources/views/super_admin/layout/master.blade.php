@@ -12,7 +12,7 @@
 
     <!-- App favicon -->
     <title>Lokalista</title>
-    <link rel="shortcut icon" href="/dapuranita/logo1.png">
+    <link rel="shortcut icon" href="/lokaslista/logo1.png">
     <!-- Favicon-->
     @yield('css')
 
@@ -34,7 +34,7 @@
         <div class="brand">
             <a href="index.html" class="logo">
                 <span>
-                    <img src="/dapuranita/logo1.png" alt="logo-small" height="55" width="55">
+                    <img src="/lokaslista/logo1.png" alt="logo-small" height="55" width="55">
                 </span>
                 <span>
 

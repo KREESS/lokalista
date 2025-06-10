@@ -134,10 +134,12 @@
                                                 }
                                                 echo rupiah($harga_ongkir);
                                             @endphp --}}
-                                            @php
-                                                $harga_ongkir = 0;
-                                                $estimasi = '';
 
+                                            @php
+                                            $harga_ongkir = 0;
+                                            $estimasi = '';
+
+                                            if (is_array($ongkir)) {
                                                 foreach ($ongkir as $ongkirItem) {
                                                     if (!empty($ongkirItem['costs'])) {
                                                         $cost = $ongkirItem['costs'][1] ?? $ongkirItem['costs'][0];
@@ -146,33 +148,28 @@
                                                             foreach ($cost['cost'] as $costDetail) {
                                                                 $harga_ongkir = $costDetail['value'] ?? 0;
                                                                 $estimasi = $costDetail['etd'] ?? '';
-                                                                // Jika hanya butuh satu, bisa break di sini
                                                                 break;
                                                             }
                                                         }
                                                     }
                                                 }
+                                            }
 
-                                                echo rupiah($harga_ongkir);
-                                            @endphp
+                                            $total_bayar = $total + $harga_ongkir;
+                                        @endphp
+                                        <tr>
+                                            <td class="fw-semibold">Estimasi Tiba</td>
+                                            <td>{{ $estimasi }} Hari</td>
+                                        </tr>
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold">Estimasi Tiba</td>
-                                        <td>{{ $estimasi }} Hari</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold  border-bottom-0">Total</td>
-                                        <td class="text-dark  border-bottom-0">
-                                            <strong>
-                                                @php
-                                                    $total_bayar = $total + $harga_ongkir;
-                                                    echo rupiah($total_bayar);
-                                                @endphp
-                                            </strong>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="fw-semibold  border-bottom-0">Total</td>
+                                            <td class="text-dark  border-bottom-0">
+                                                <strong>
+                                                    {{ rupiah($total + $harga_ongkir) }}
+                                                </strong>
+                                            </td>
+                                        </tr>
                                 </tbody>
                             </table>
                             <!--end table-->
@@ -290,6 +287,8 @@
                     <!-- Data tetap -->
                     <input type="hidden" name="total_bayar" value="{{ $total_bayar }}">
                     <input type="hidden" name="ongkir" value="{{ $harga_ongkir }}">
+
+
 
                     <!-- Tombol Bayar -->
                     <button type="submit" class="btn btn-warning mt-3" id="pay-button">Bayar Sekarang</button>

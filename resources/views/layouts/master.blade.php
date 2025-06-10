@@ -12,13 +12,14 @@
 
     <!-- App favicon -->
     <title>Lokalista</title>
-    <link rel="shortcut icon" href="/dapuranita/logo1.png">
+    <link rel="shortcut icon" href="/lokalista/logo1.png">
     <!-- Favicon-->
     @yield('css')
 
     <style>
         .navbar-custom {
             background-color: #ff7700 !important; /* Biru Bootstrap */
+            color: white;
         }
     </style>
 
@@ -38,7 +39,7 @@
         <!-- LOGO -->
             <a href="" class="logo">
                 <span>
-                    <img src="/dapuranita/LOGOputih.png" alt="logo-small" style="background-color: #ff7700; height:60px; width:60px;">
+                    <img src="/lokalista/LOGOputih.png" alt="logo-small" style="background-color: #ff7700; height:60px; width:60px;">
                 </span>
             </a>
         <!--end logo-->

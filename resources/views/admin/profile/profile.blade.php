@@ -53,7 +53,7 @@
                                                 <img src="/foto_profile/{{ Auth::user()->foto_profile }}" alt=""
                                                     height="110" class="rounded-circle">
                                             @else
-                                                <img src="/dapuranita/default.jpg" alt="" height="110"
+                                                <img src="/lokalista/default.jpg" alt="" height="110"
                                                     class="rounded-circle">
                                             @endif
                                             <span class="met-profile_main-pic-change">
@@ -286,7 +286,7 @@
                             @if (!empty(Auth::user()->foto_profile))
                             <img id="output1" src="/foto_profile/{{ Auth::user()->foto_profile }}" class="img-fluid" />
                             @else
-                            <img id="output1" src="/dapuranita/default.jpg" class="img-fluid" />
+                            <img id="output1" src="/lokalista/default.jpg" class="img-fluid" />
                             @endif
                         </div>
                         <!--end col-->

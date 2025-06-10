@@ -40,7 +40,7 @@
                     <div class="card-body invoice-head">
                         <div class="row">
                             <div class="col-md-4 align-self-center">
-                                <img src="/dapuranita/logo1.png" alt="logo-small" class="logo-sm me-1" height="40">
+                                <img src="/lokaslista/logo1.png" alt="logo-small" class="logo-sm me-1" height="40">
                                 <img src="assets/images/logo.png" alt="logo-large" class="logo-lg brand-light"
                                     height="16">
                                 <p class="mt-2 mb-0 text-muted">Invoice Pesanan Kode #PP00{{ $pesanan->id_pesanan }}</p>
@@ -178,7 +178,7 @@
                             <div class="col-lg-6 align-self-center">
                                 <div class="float-none float-md-end" style="width: 30%;">
                                     <small>Dapur Anita</small>
-                                    <img src="/dapuranita/logo1.png" alt="" class="mt-2 mb-1"
+                                    <img src="/lokaslista/logo1.png" alt="" class="mt-2 mb-1"
                                         height="20">
                                 </div>
                             </div>

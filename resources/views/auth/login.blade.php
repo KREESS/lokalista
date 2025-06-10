@@ -11,8 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <title>Dapur Anita</title>
-    <link rel="shortcut icon" href="/dapuranita/logo1.png">
+    <title>Lokalista</title>
+    <link rel="shortcut icon" href="/lokalista/LOGOoren.png">
 
 
 
@@ -35,7 +35,7 @@
                                 <div class="card-body p-0">
                                     <div class="text-center p-3">
                                         <a href="index.html" class="logo logo-admin">
-                                            <img src="/dapuranita/LOGOoren.png" height="80" alt="logo"
+                                            <img src="/lokalista/LOGOoren.png" height="80" alt="logo"
                                                 class="auth-logo">
                                         </a>
                                         <h4 class="mt-3 mb-1 fw-semibold font-18">Selamat Datang Di LOKALISTA</h4>

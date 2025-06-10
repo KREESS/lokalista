@@ -58,7 +58,7 @@
                                     <a href="{{ route('admin.chat_detail', $chat->id) }}" class="media new-message">
                                         <div class="media-left">
                                             @if ($chat->foto_profile == null)
-                                                <img src="/dapuranita/default.jpg" alt="profile-user"
+                                                <img src="/lokalista/default.jpg" alt="profile-user"
                                                     class="rounded-circle thumb-md" />
                                             @else
                                                 <img src="/foto_profile/{{ $chat->foto_profile }}" alt="profile-user"
@@ -88,7 +88,7 @@
                         <a href="" class="media">
                             <div class="media-left">
                                 @if ($nama_user->foto_profile == null)
-                                    <img src="/dapuranita/default.jpg" alt="user" class="rounded-circle thumb-sm">
+                                    <img src="/lokalista/default.jpg" alt="user" class="rounded-circle thumb-sm">
                                 @else
                                     <img src="/foto_profile/{{ $nama_user->foto_profile }}" alt="user"
                                         class="rounded-circle thumb-sm">
@@ -112,7 +112,7 @@
                                     @else
                                         @if ($pesan->foto_profile == NULL)
                                         <div class="media-img">
-                                            <img src="/dapuranita/default.jpg" alt="user" class="rounded-circle thumb-sm">
+                                            <img src="/lokalista/default.jpg" alt="user" class="rounded-circle thumb-sm">
                                         </div>
                                         @else
                                         <div class="media-img">
@@ -163,7 +163,7 @@
                                             <img src="/foto_profile/{{ Auth::user()->foto_profile }}" alt="profile-user"
                                                 class="rounded-circle thumb-sm" />
                                         @else
-                                            <img src="/dapuranita/default.jpg" alt="profile-user"
+                                            <img src="/lokalista/default.jpg" alt="profile-user"
                                                 class="rounded-circle thumb-sm" />
                                         @endif
                                     </span>
