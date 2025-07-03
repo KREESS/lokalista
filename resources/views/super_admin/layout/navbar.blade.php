@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown parent-menu-item">
-                <a class="nav-link" href="{{ route('superadmin.pengaturan.index') }}">
+                <a class="nav-link" href="#">
                     <span><i class="ti ti-file-report menu-icon"></i>Pengaturan</span>
                 </a>
             </li>

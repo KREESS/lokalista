@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
@@ -18,25 +13,20 @@ return new class extends Migration
             $table->string('invoice_number');
             $table->bigInteger('amount');
             $table->string('status');
-            $table->unsignedBigInteger('id_pesanan')->after('id')->nullable();
-
-            // Menambahkan foreign key ke tabel pesanan
-            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan')->onDelete('set null');
+            $table->unsignedBigInteger('id_pesanan')->nullable(); // ✅ tanpa after()
             $table->timestamps();
+
+            // Foreign key ke tabel pesanan
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan')->onDelete('set null');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('transactions');
         Schema::table('transactions', function (Blueprint $table) {
             $table->dropForeign(['id_pesanan']);
-            $table->dropColumn('id_pesanan');
         });
+
+        Schema::dropIfExists('transactions');
     }
 };

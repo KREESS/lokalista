@@ -15,66 +15,88 @@ class AlamatUserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get_provinsi()
-    {
-        $curl = curl_init();
+{
+    $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "key: f201c33f7b1021a48e2a76125bfa5e15"
-            ),
-        ));
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "key: f201c33f7b1021a48e2a76125bfa5e15"
+        ),
+    ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
 
-        curl_close($curl);
+    curl_close($curl);
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
+    if ($err) {
+        \Log::error('cURL Error RajaOngkir (provinsi): ' . $err);
+        return [];
+    } else {
+        $response = json_decode($response, true);
+
+        if (
+            isset($response['rajaongkir']['status']['code']) &&
+            $response['rajaongkir']['status']['code'] == 200 &&
+            isset($response['rajaongkir']['results'])
+        ) {
+            return $response['rajaongkir']['results'];
         } else {
-            $response = json_decode($response, true);
-            $provinsi = $response['rajaongkir']['results'];
-            return $provinsi;
+            \Log::error('Unexpected RajaOngkir response (provinsi)', ['response' => $response]);
+            return [];
         }
     }
+}
 
-    public function get_city()
-    {
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.rajaongkir.com/starter/city",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "key: f201c33f7b1021a48e2a76125bfa5e15"
-            ),
-        ));
+public function get_city()
+{
+    $curl = curl_init();
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/city",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "key: f201c33f7b1021a48e2a76125bfa5e15"
+        ),
+    ));
 
-        curl_close($curl);
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
+    curl_close($curl);
+
+    if ($err) {
+        \Log::error('cURL Error RajaOngkir (city): ' . $err);
+        return [];
+    } else {
+        $response = json_decode($response, true);
+
+        if (
+            isset($response['rajaongkir']['status']['code']) &&
+            $response['rajaongkir']['status']['code'] == 200 &&
+            isset($response['rajaongkir']['results'])
+        ) {
+            return $response['rajaongkir']['results'];
         } else {
-            $response = json_decode($response, true);
-            $city = $response['rajaongkir']['results'];
-            return $city;
+            \Log::error('Unexpected RajaOngkir response (city)', ['response' => $response]);
+            return [];
         }
     }
+}
+
 
     public function index()
     {
