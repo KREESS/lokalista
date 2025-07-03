@@ -31,4 +31,14 @@ class Pesanan extends Model
     {
         return $this->hasMany(Transaction::class, 'id_pesanan', 'id_pesanan');
     }
+
+    public function produk()
+    {
+        return $this->belongsTo(\App\Models\Produk::class, 'id_produk');
+    }
+
+    public function alamat()
+    {
+        return $this->belongsTo(\App\Models\Alamat::class, 'id_user', 'id_user');
+    }
 }
