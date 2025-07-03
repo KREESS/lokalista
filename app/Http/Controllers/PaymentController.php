@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Http; // Jika pakai Http client Laravel
 use Illuminate\Support\Facades\DB;
 use Midtrans\Notification;
 
-
-
-
-
 class PaymentController extends Controller
 {
     public function proses(Request $request)
@@ -25,7 +21,6 @@ class PaymentController extends Controller
         $idUser = Auth::id();
         $produkIds = $request->id_produk;
         $quantities = $request->quantity;
-
         $pesananBaru = [];
 
         foreach ($produkIds as $i => $idProduk) {
@@ -121,7 +116,6 @@ class PaymentController extends Controller
             'id_pesanan'
         ));
     }
-
 
     public function updateStatusPembayaran(Request $request)
     {
