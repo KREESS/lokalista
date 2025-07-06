@@ -75,7 +75,7 @@
                                         <td>{{ $data->status }}</td>
                                         <td><span class="badge badge-soft-primary p-2">{{ Str::upper($data->tipe_pembayaran) }}</span></td>
                                         <td>
-                                            <a href="{{ route('admin.pesanan_terima', $data->id_pesanan) }}" style="color:green" onclick="return confirm('Apakah Yakin Pembayaran Telah Sesuai ?');">
+                                            <a href="javascript:void(0)" class="btn-terima" data-url="{{ route('admin.pesanan_terima', $data->id_pesanan) }}" style="color:green">
                                                 <i class="ti ti-checks"></i> Terima
                                             </a> |
                                             <a href="{{ route('admin.pesanan_tolak', $data->id_pesanan) }}" style="color:red">
@@ -112,7 +112,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 @endforeach
                             </tbody>
                         </table>
@@ -130,4 +129,30 @@
 
 @section('js')
     <script src="/js/zoom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.btn-terima').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = this.dataset.url;
+
+                    Swal.fire({
+                        title: 'Konfirmasi Pembayaran',
+                        text: "Apakah Yakin Pembayaran Telah Sesuai?",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#198754',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, Terima',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

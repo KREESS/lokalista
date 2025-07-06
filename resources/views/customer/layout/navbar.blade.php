@@ -187,7 +187,7 @@
                     <img src="/foto_profile/{{ Auth::user()->foto_profile }}" alt="profile-user"
                         class="rounded-circle me-0 me-md-2 thumb-sm" />
                 @else
-                    <img src="/dapuranita/default.jpg" alt="profile-user"
+                    <img src="/lokalista/default.jpg" alt="profile-user"
                         class="rounded-circle me-0 me-md-2 thumb-sm" />
                 @endif
                 <div class="user-name">

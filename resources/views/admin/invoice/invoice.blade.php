@@ -52,19 +52,19 @@
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-web"></i>
-                                            <p class="text-muted mb-0">www.Dapur-Anita.com</p>
+                                            <p class="text-muted mb-0">www.Lokalista</p>
                                         </div>
                                     </li>
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-phone"></i>
-                                            <p class="text-muted mb-0">0857-4059-0305</p>
+                                            <p class="text-muted mb-0">0813-2080-2262</p>
                                         </div>
                                     </li>
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-map-marker"></i>
-                                            <p class="text-muted mb-0">51372 Kendal, Indonesia</p>
+                                            <p class="text-muted mb-0">Indramayu, Indonesia</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -99,11 +99,11 @@
                                 <div class="">
                                     <address class="font-13">
                                         <strong class="font-14">Pengirim :</strong><br>
-                                        Dapur Anita<br>
-                                        Perumahan Griya Mutiara Prima No. C3<br>
-                                        Ds. Mororejo, RT.01/RW.02
-                                        Kec. Kaliwungu Kab.Kendal, Jawa Tengah<br>
-                                        <abbr title="Phone">No. Telp:</abbr> 0857-4059-0305
+                                        Lokalista<br>
+                                        Perumahan RSS Pabean Udik Indramayu<br>
+                                        Jl. Cumi - cumi 13 No.159
+                                        Kec. Indramayu Kab.Indramayu, Jawa Barat<br>
+                                        <abbr title="Phone">No. Telp:</abbr> 0813-2080-2262
                                     </address>
                                 </div>
                             </div>
@@ -177,8 +177,8 @@
                             <!--end col-->
                             <div class="col-lg-6 align-self-center">
                                 <div class="float-none float-md-end" style="width: 30%;">
-                                    <small>Dapur Anita</small>
-                                    <img src="/lokaslista/logo1.png" alt="" class="mt-2 mb-1"
+                                    <small>Lokalista</small>
+                                    <img src="/lokaslista/LOGOoren.png" alt="" class="mt-2 mb-1"
                                         height="20">
                                 </div>
                             </div>

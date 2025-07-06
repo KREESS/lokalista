@@ -202,7 +202,6 @@
                             <div style="border-radius: 30px;" class="card produk-card shadow-sm rounded-lg border-0 w-100">
                                 <div class="d-flex justify-content-between p-3">
                                     <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong" style="width: 35px; height: 35px;">
-                                        <p class="text-white mb-0 small">x3</p>
                                     </div>
                                 </div>
                                 <!-- Gambar Produk -->

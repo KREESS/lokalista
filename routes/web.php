@@ -9,6 +9,8 @@ use App\Http\Controllers\admin\ProdukAdminController;
 use App\Http\Controllers\admin\ProfileAdminController;
 use App\Http\Controllers\admin\RekeningAdminController;
 use App\Http\Controllers\customer\AlamatUserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\customer\ChatCustomerController;
 use App\Http\Controllers\customer\CheckoutCustomerController;
 use App\Http\Controllers\Customer\DashboardCustomerController;
@@ -25,6 +27,7 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +43,13 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home/produk', [HomeController::class, 'produk'])->name('home.produk');
 Route::get('/produk/detail_produk/{produk}', [HomeController::class, 'detail_produk'])->name('home.produk_detail');
 Route::get('/produk/kategori/{produk}', [HomeController::class, 'search_kategori'])->name('home.produk_kategori');
+
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 
 Auth::routes();
 
