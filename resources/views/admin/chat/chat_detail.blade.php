@@ -1,189 +1,95 @@
 @extends('admin.layout.master')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-title-box">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <h4 class="page-title pb-md-0">Chat</h4>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Chat</li>
-                            </ol>
-                        </div>
-                        <!--end col-->
-                        <div class="col-auto align-self-center">
-                            <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
-                                <span class="day-name" id="Day_Name">Today:</span>&nbsp;
-                                <span class="" id="Select_date">
-                                    @php
-                                        echo date('d M');
-                                    @endphp
-                                </span>
-                                <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
-                            </a>
-                        </div>
-                        <!--end col-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <h4 class="page-title">Live Chat</h4>
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Chat</li>
+                        </ol>
                     </div>
-                    <!--end row-->
+                    <div class="col-auto align-self-center">
+                        <span class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-calendar2-week me-1"></i>{{ date('d M') }}
+                        </span>
+                    </div>
                 </div>
-                <!--end page-title-box-->
             </div>
-            <!--end col-->
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="chat-box-left">
-                    <ul class="nav nav-tabs mb-3 nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active"id="general_chat_tab" data-bs-toggle="tab" href="#general_chat"
-                                role="tab">General</a>
-                        </li>
-                    </ul>
-                    <!--end chat-search-->
-
-                    <div class="chat-body-left" data-simplebar>
-                        <div class="tab-content chat-list" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="general_chat">
-                                @foreach ($chat as $chat)
-                                    @php
-                                        $badge = DB::Table('chat')
-                                            ->where('from_id', $chat->id)
-                                            ->where('status', 'off read')
-                                            ->get();
-                                    @endphp
-                                    <a href="{{ route('admin.chat_detail', $chat->id) }}" class="media new-message">
-                                        <div class="media-left">
-                                            @if ($chat->foto_profile == null)
-                                                <img src="/lokalista/default.jpg" alt="profile-user"
-                                                    class="rounded-circle thumb-md" />
-                                            @else
-                                                <img src="/foto_profile/{{ $chat->foto_profile }}" alt="profile-user"
-                                                    class="rounded-circle thumb-md" />
-                                            @endif
-                                        </div><!-- media-left -->
-                                        <div class="media-body">
-                                            <div class="d-inline-block">
-                                                <h6>{{ Str::title($chat->name) }}</h6>
-                                                @if ($badge->count() > 0)
-                                                    <p><span class="badge bg-danger">{{ $badge->count() }} Pesan </span></p>
-                                                @endif
-                                            </div>
-                                        </div><!-- end media-body -->
-                                    </a>
-                                @endforeach
-                                <!--end media-->
-                            </div>
-                        </div>
-                        <!--end tab-content-->
-                    </div>
-                </div>
-                <!--end chat-box-left -->
-
-                <div class="chat-box-right">
-                    <div class="chat-header">
-                        <a href="" class="media">
-                            <div class="media-left">
-                                @if ($nama_user->foto_profile == null)
-                                    <img src="/lokalista/default.jpg" alt="user" class="rounded-circle thumb-sm">
-                                @else
-                                    <img src="/foto_profile/{{ $nama_user->foto_profile }}" alt="user"
-                                        class="rounded-circle thumb-sm">
-                                @endif
-                            </div><!-- media-left -->
-                            <div class="media-body">
-                                <div>
-                                    <h6 class="m-0">{{ Str::title($nama_user->name) }}</h6>
-                                </div>
-                            </div><!-- end media-body -->
-                        </a>
-                        <!--end media-->
-                        <!-- end chat-features -->
-                    </div><!-- end chat-header -->
-                    <div class="chat-body" data-simplebar>
-                        <div class="chat-detail">
-                            @foreach ($pesan as $pesan)
-                                <div class="media">
-                                    @if ($pesan->from_id == Auth::user()->id)
-
-                                    @else
-                                        @if ($pesan->foto_profile == NULL)
-                                        <div class="media-img">
-                                            <img src="/lokalista/default.jpg" alt="user" class="rounded-circle thumb-sm">
-                                        </div>
-                                        @else
-                                        <div class="media-img">
-                                            <img src="/foto_profile/{{ $pesan->foto_profile }}" alt="user" class="rounded-circle thumb-sm">
-                                        </div>
-                                        @endif
-                                    @endif
-                                    <div class="media-body {{ $pesan->from_id == Auth::user()->id ? 'reverse' : '' }}">
-                                        <div class="chat-msg">
-                                            <p>{{ $pesan->pesan }}</p>
-                                        </div>
-                                        @if ($pesan->from_id == Auth::user()->id)
-                                            <div class=""></div>
-                                        @else
-                                            <div class="chat-time">{{ $pesan->created_at }}</div>
-                                        @endif
-                                    </div>
-                                    <!--end media-body-->
-                                </div>
-                            @endforeach
-                            <!--end media-->
-
-                            {{-- <div class="media">
-                                <div class="media-body reverse">
-                                    <div class="chat-msg">
-                                        <p>Good Morning !</p>
-                                    </div>
-                                    <div class="chat-msg">
-                                        <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                    </div>
-                                </div>
-                                <!--end media-body-->
-                                <div class="media-img">
-                                    <img src="assets/images/users/user-8.jpg" alt="user"
-                                        class="rounded-circle thumb-sm">
-                                </div>
-                            </div> --}}
-                        </div> <!-- end chat-detail -->
-                    </div><!-- end chat-body -->
-                    <div class="chat-footer">
-                        <form action="{{ route('admin.post_chat') }}" method="post">
-                            @csrf
-                            @method('post')
-                            <div class="row">
-                                <div class="col-12 col-md-9">
-                                    <span class="chat-admin">
-                                        @if (!empty(Auth::user()->foto_profile))
-                                            <img src="/foto_profile/{{ Auth::user()->foto_profile }}" alt="profile-user"
-                                                class="rounded-circle thumb-sm" />
-                                        @else
-                                            <img src="/lokalista/default.jpg" alt="profile-user"
-                                                class="rounded-circle thumb-sm" />
-                                        @endif
-                                    </span>
-                                    <input type="text" name="id_from" class="form-control chat-input"
-                                                    placeholder="" value="{{ $id }}" hidden>
-                                    <input type="text" name="pesan" class="form-control"
-                                        placeholder="Type something here..." required>
-                                </div><!-- col-8 -->
-                                <div class="col-3 text-end">
-                                    <div class="d-none d-sm-inline-block chat-features">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="ti ti-send"></i>
-                                            Kirim Pesan</button>
-                                    </div>
-                                </div><!-- end col -->
-                            </div>
-                        </form><!-- end row -->
-                    </div><!-- end chat-footer -->
-                </div>
-                <!--end chat-box-right -->
-            </div> <!-- end col -->
         </div>
     </div>
+
+    {{-- Chat box --}}
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-white d-flex align-items-center">
+                    <img src="{{ $nama_user->foto_profile ? '/foto_profile/' . $nama_user->foto_profile : '/lokalista/default.jpg' }}"
+                        alt="User" class="rounded-circle me-3" width="40" height="40">
+                    <h6 class="mb-0">{{ Str::title($nama_user->name) }}</h6>
+                </div>
+
+                <div class="card-body p-3" style="height: 500px; overflow-y: auto;" data-simplebar>
+                    <div class="chat-detail">
+                        @foreach ($pesan as $p)
+                            @php
+                                $isAdmin = $p->is_from_admin;
+                                $foto = $isAdmin
+                                    ? (Auth::user()->foto_profile ? '/foto_profile/' . Auth::user()->foto_profile : '/lokalista/default.jpg')
+                                    : ($nama_user->foto_profile ? '/foto_profile/' . $nama_user->foto_profile : '/lokalista/default.jpg');
+                            @endphp
+
+                            <div class="d-flex mb-3 {{ $isAdmin ? 'justify-content-end text-end' : '' }}">
+                                @if (!$isAdmin)
+                                    <img src="{{ $foto }}" class="rounded-circle me-2" width="32" height="32">
+                                @endif
+
+                                <div>
+                                    <div class="px-3 py-2 rounded-3 shadow-sm 
+                                        {{ $isAdmin ? 'bg-warning text-white' : 'bg-light border' }}" 
+                                        style="max-width: 400px;">
+                                        {{ $p->message }}
+                                    </div>
+                                    <small class="text-muted d-block mt-1">{{ $p->created_at->format('H:i - d M Y') }}</small>
+                                </div>
+
+                                @if ($isAdmin)
+                                    <img src="{{ $foto }}" class="rounded-circle ms-2" width="32" height="32">
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <form action="{{ route('admin.livechat.send') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $id }}">
+                        <div class="input-group">
+                            <input type="text" name="message" class="form-control" placeholder="Ketik pesan..." required>
+                            <button type="submit" class="btn btn-warning d-flex align-items-center justify-content-center px-3">
+                                <i class="bi bi-send-fill fs-5"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const chatBody = document.querySelector('.chat-body');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    });
+</script>
+
 @endsection

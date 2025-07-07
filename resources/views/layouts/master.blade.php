@@ -113,24 +113,6 @@
         </div>
         <!--end offcanvas-body-->
     </div>
-    <!--end Rightbar/offcanvas-->
-    <!--end Rightbar-->
-
-    <!--Start Footer-->
-    <!-- Footer Start -->
-
-    {{-- <footer class="footer text-center text-sm-start">
-        &copy;
-        <script>
-            document.write(new Date().getFullYear())
-        </script> Metrica <span class="text-muted d-none d-sm-inline-block float-end">Crafted with <i
-                class="mdi mdi-heart text-danger"></i> by Dapur Anita</span>
-    </footer> --}}
-    <!-- end Footer -->
-    <!--end footer-->
-
-    <!-- Javascript  -->
-    <!-- vendor js -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/metrica/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

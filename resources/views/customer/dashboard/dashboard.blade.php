@@ -2,36 +2,6 @@
 
 @section('content')
     <div class="container-fluid">
-        {{-- <div class="row">
-            <div class="col-sm-12">
-                <div class="page-title-box">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <h4 class="page-title pb-md-0">Dashboard</h4>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div>
-                        <!--end col-->
-                        <div class="col-auto align-self-center">
-                            <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
-                                <span class="day-name" id="Day_Name">Today:</span>&nbsp;
-                                <span class="" id="Select_date">
-                                    @php
-                                        echo date('d M');
-                                    @endphp
-                                </span>
-                                <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
-                            </a>
-                        </div>
-                        <!--end col-->
-                    </div>
-                    <!--end row-->
-                </div>
-                <!--end page-title-box-->
-            </div>
-            <!--end col-->
-        </div> --}}
 
         <div class="row mt-4">
             <div class="col-md-12">
@@ -47,10 +17,6 @@
                                 Kami mempermudah Anda menemukan produk-produk lokal berkualitas dengan harga bersaing, 
                                 sambil membantu pelaku UMKM tumbuh dan berkembang bersama teknologi.
                             </p>
-                            {{-- <button type="button" class="btn btn-lg rounded-pill px-4 py-2 mt-3 shadow-sm"
-                                style="background-color: #ff7700; border: none; color: white; transition: 0.3s;">
-                                Get Started
-                            </button> --}}
                         </div>
                     </div>
                     <!--end col-->
@@ -59,27 +25,22 @@
                             border-radius: 50px;
                             overflow: hidden;
                             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-                            /* margin-left: auto; Biar ke pojok kanan */
                         }
-                    
                         .carousel-indicators li {
                             width: 10px;
                             height: 10px;
                             border-radius: 50%;
-                            background-color: #ED7D31 !important; /* warna oren */
+                            background-color: #ED7D31 !important;
                             margin: 5px;
                         }
-                    
                         .carousel-indicators .active {
                             background-color: #ED7D31 !important;
                         }
-                    
                         .carousel-control-prev-icon,
                         .carousel-control-next-icon {
                             filter: brightness(0) invert(1);
                         }
                     </style>
-                    
                     <div class="col-lg-5 offset-lg-1 text-end"> <!-- Geser sedikit ke kanan -->
                         <div id="carouselExampleIndicators" class="carousel slide custom-carousel" data-bs-ride="carousel">
                             <ol class="carousel-indicators">
@@ -108,8 +69,6 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <!--end col-->
                 </div>
             </div>
         </div>
@@ -179,7 +138,6 @@
             .produk-card {
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
-        
             .produk-card:hover {
                 transform: scale(1.05);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -196,7 +154,6 @@
                                 return 'Rp ' . number_format($angka, 2, ',', '.');
                             }
                         @endphp
-
                     @forelse ($produk as $data)
                         <div class="col-md-3 mb-3 d-flex align-items-stretch">
                             <div style="border-radius: 30px;" class="card produk-card shadow-sm rounded-lg border-0 w-100">
@@ -237,89 +194,9 @@
                         @endforelse
                     </div>
                 </div>
-              </div>
             </div>
-          </section>          
-          
-        {{-- <div id="grid" class="row g-3">
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["craft"]'>
-                <a href="/lokalista/kerajinan1.jpg" class="lightbox">
-                    <img src="/lokalista/kerajinan1.jpg" alt="" class="img-fluid" />
-                </a>
             </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/lokalista/minuman1.jpeg" class="lightbox">
-                    <img src="/lokalista/minuman1.jpeg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["craft"]'>
-                <a href="/lokalista/kerajinan2.jpg" class="lightbox">
-                    <img src="/lokalista/kerajinan2.jpg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["food"]'>
-                <a href="/lokalista/img-7.jpg" class="lightbox">
-                    <img src="/lokalista/img-7.jpg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/lokalista/minuman3.jpeg" class="lightbox">
-                    <img src="/lokalista/minuman3.jpeg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["health"]'>
-                <a href="/lokalista/kesehatan.jpg" class="lightbox">
-                    <img src="/lokalista/kesehatan1.jpg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["food"]'>
-                <a href="/lokalista/img-10.jpg" class="lightbox">
-                    <img src="/lokalista/img-10.jpg" alt="" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-4 col-lg-3 picture-item" data-groups='["drink"]'>
-                <a href="/lokalista/minuman2.jpg" class="lightbox">
-                    <img src="/lokalista/minuman2.jpg" alt="" class="img-fluid" />
-                </a>
-            </div>
-        </div> --}}
-        
-
-        {{-- <div class="row">
-            @php
-                function rupiah($angka)
-                {
-                    $hasil_rupiah = 'Rp ' . number_format($angka, 2, ',', '.');
-                    return $hasil_rupiah;
-                }
-            @endphp
-            @foreach ($produk as $data)
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="ribbon1 rib1-danger">
-                                <span class="text-white text-center rib1-danger">New</span>
-                            </div>
-                            <!--end ribbon-->
-                            <img src="/produk/{{ $data->foto_produk }}" alt="" class="d-block mx-auto my-4"
-                                height="150">
-                            <div class="d-flex justify-content-between align-items-center my-4">
-                                <div>
-                                    <p class="text-muted mb-2">{{ Str::title($data->nama_kategori) }}</p>
-                                    <a href="#" class="header-title">{{ Str::title($data->nama_produk) }}</a>
-                                </div>
-                                <div>
-                                    <h4 class="text-dark mt-0 mb-2">{{ rupiah($data->harga_produk) }}</h4>
-                                </div>
-                            </div>
-                            <div class="d-grid">
-                                <button class="btn btn-de-warning">Masukan Keranjang</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div> --}}
+        </section>          
     </div>
 @endsection
 

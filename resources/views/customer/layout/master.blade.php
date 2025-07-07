@@ -131,6 +131,7 @@
 
     <!-- Javascript  -->
     <!-- vendor js -->
+@include('live-chat')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/metrica/dist/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

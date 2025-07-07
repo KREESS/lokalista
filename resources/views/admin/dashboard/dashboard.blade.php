@@ -10,11 +10,14 @@
         </div>
     </div>
 
-    @php
+@php
+    if (!function_exists('rupiah')) {
         function rupiah($angka) {
             return 'Rp ' . number_format($angka, 2, ',', '.');
         }
-    @endphp
+    }
+@endphp
+s
 
     <div class="row">
         <div class="col-lg-12">

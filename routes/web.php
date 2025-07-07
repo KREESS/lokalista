@@ -26,6 +26,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LiveChatController;
+
 
 
 /*
@@ -83,9 +85,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/admin/pesanan_kirim', [PesananAdminController::class, 'pesanan_kirim'])->name('admin.pesanan_kirim');
     Route::get('/admin/pesanan_deliver', [PesananAdminController::class, 'pesanan_deliver'])->name('admin.pesanan_deliver');
 
-    Route::get('/admin/chat', [ChatAdminController::class, 'index'])->name('admin.chat');
-    Route::get('/admin/chat_detail/{chat}', [ChatAdminController::class, 'detail_chat'])->name('admin.chat_detail');
-    Route::post('/admin/chat_detail', [ChatAdminController::class, 'send'])->name('admin.post_chat');
+    Route::get('/livechat', [ChatAdminController::class, 'livechat_index'])->name('admin.livechat');
+    // Route::get('/livechat/{user_id}', [ChatAdminController::class, 'livechat_detail'])->name('admin.livechat.detail');
+    Route::post('/livechat/send', [ChatAdminController::class, 'livechat_send'])->name('admin.livechat.send');
+    Route::get('/admin/livechat/{id}', [ChatAdminController::class, 'livechatDetail'])->name('admin.livechat.detail');
 
     Route::get('/admin/Laporan', [LaporanPenjualanAdminController::class, 'index'])->name('admin.laporan');
     Route::post('/admin/Laporan', [LaporanPenjualanAdminController::class, 'laporan_cari'])->name('admin.laporan_cari');
@@ -139,7 +142,7 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
     Route::post('/checkout/proses', [PaymentController::class, 'proses'])->name('checkout.proses');
     Route::any('/checkout/sukses', [PaymentController::class, 'updateStatusPembayaran'])->name('checkout.sukses');
 });
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::middleware(['auth', 'user-access:super admin'])->group(function () {
 
@@ -158,4 +161,9 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::put('/users/update/{id}', [SuperAdminUserController::class, 'update'])->name('superadmin.users.update');
     Route::delete('/users/delete/{id}', [SuperAdminUserController::class, 'destroy'])->name('superadmin.users.destroy');
     Route::post('/users/toggle/{id}', [SuperAdminUserController::class, 'toggleActive'])->name('superadmin.users.toggle');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/live-chat/fetch', [LiveChatController::class, 'fetch'])->name('livechat.fetch');
+    Route::post('/live-chat/send', [LiveChatController::class, 'send'])->name('livechat.send');
 });

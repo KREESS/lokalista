@@ -8,57 +8,44 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\LiveChat;
+
 
 class ChatAdminController extends Controller
 {
-    public function index()
-    {
-        $chat = Chat::join('users', 'users.id', '=', 'chat.from_id')
-        ->select('users.id', 'users.name', 'users.foto_profile', DB::raw('COUNT(*) AS total'))
-        ->where('chat.to_id', Auth::user()->id)
-        // ->where('chat.status','off read')
-        ->groupBy('users.id', 'users.name', 'users.foto_profile')
-        ->orderBy('chat.created_at', 'desc')
-        ->get();
 
-        return view('admin.chat.chat', compact(['chat']));
+    public function livechat_index()
+    {
+        // Ambil semua user yang pernah kirim pesan ke admin (tanpa is_from_admin)
+        $users = LiveChat::where('is_from_admin', false)
+            ->with('user')
+            ->select('user_id', DB::raw('MAX(created_at) as last_message_time'))
+            ->groupBy('user_id')
+            ->orderByDesc('last_message_time')
+            ->get();
+
+        return view('admin.chat.chat', compact('users'));
     }
 
-    public function detail_chat($id)
+    public function livechatDetail($id)
     {
-        Chat::where('from_id', $id)->update([
-            'status'=>'on read'
-        ]);
+        $nama_user = User::findOrFail($id);
 
-        $chat = Chat::join('users', 'users.id', '=', 'chat.from_id')
-        ->select('users.id', 'users.name', 'users.foto_profile', DB::raw('COUNT(*) AS total'))
-        ->where('chat.to_id', Auth::user()->id)
-        // ->where('chat.status','off read')
-        ->groupBy('users.id', 'users.name', 'users.foto_profile')
-        ->orderBy('chat.created_at', 'desc')
-        ->get();
+        $pesan = LiveChat::where('user_id', $id)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-        $pesan = Chat::where('to_id', $id)
-        ->where('from_id', Auth::user()->id)
-        ->orWhere('to_id', Auth::user()->id)
-        ->where('from_id', $id)
-        ->orderBy('created_at', 'asc')
-        ->get();
-
-        $id = $id;
-
-        $nama_user = User::find($id);
-
-        return view('admin.chat.chat_detail', compact(['chat','pesan', 'id', 'nama_user']));
+        return view('admin.chat.chat_detail', compact('pesan', 'nama_user', 'id'));
     }
 
-    public function send(Request $request)
+
+
+    public function livechat_send(Request $request)
     {
-        Chat::create([
-            'from_id'=>1,
-            'to_id'=>$request->id_from,
-            'pesan'=>$request->pesan,
-            'status'=>'off read',
+        LiveChat::create([
+            'user_id' => $request->user_id,
+            'message' => $request->message,
+            'is_from_admin' => true,
         ]);
 
         return back();

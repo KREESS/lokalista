@@ -389,22 +389,21 @@
                 </ul>
                 <!--end submenu-->
             </li>
-
             @php
-                $notif_chat = DB::Table('chat')
-                    ->where('to_id', Auth::user()->id)
-                    ->where('status', 'off read')
-                    ->get();
+                use App\Models\LiveChat;
+
+                $notif_chat = LiveChat::where('is_from_admin', false)->get();
             @endphp
+
             <li class="nav-item dropdown parent-menu-item">
-                <a class="nav-link" href="{{ route('admin.chat') }}">
-                    <span><i class="ti ti-brand-hipchat menu-icon"></i>Chat</span>
+                <a class="nav-link" href="{{ route('admin.livechat') }}">
+                    <span><i class="ti ti-brand-hipchat menu-icon"></i> Chat</span>
                     @if ($notif_chat->count() > 0)
-                    <span class="badge bg-danger">{{ $notif_chat->count() }}</span>
+                        <span class="badge bg-danger">{{ $notif_chat->count() }}</span>
                     @endif
                 </a>
-
             </li>
+
             <!--end nav-item-->
             <!--end nav-item-->
         </ul><!-- End navigation menu -->

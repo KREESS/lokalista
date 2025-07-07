@@ -109,21 +109,6 @@
                             @endforeach
                             <!--end media-->
 
-                            {{-- <div class="media">
-                                <div class="media-body reverse">
-                                    <div class="chat-msg">
-                                        <p>Good Morning !</p>
-                                    </div>
-                                    <div class="chat-msg">
-                                        <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                    </div>
-                                </div>
-                                <!--end media-body-->
-                                <div class="media-img">
-                                    <img src="assets/images/users/user-8.jpg" alt="user"
-                                        class="rounded-circle thumb-sm">
-                                </div>
-                            </div> --}}
                         </div> <!-- end chat-detail -->
                     </div><!-- end chat-body -->
                     <div class="chat-footer">
