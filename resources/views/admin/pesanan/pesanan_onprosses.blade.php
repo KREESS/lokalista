@@ -72,66 +72,77 @@
                                             <td><a href="{{ route('admin.pesanan_invoice', $data->id_pesanan) }}"
                                                     target="_blank" class="btn btn-sm btn-secondary"><i
                                                         class="ti ti-file-invoice"> Invoice</i></a></td>
-                                            <td>
-                                                @if ($data->tipe_pembayaran == 'lunas')
-                                                    <button class="btn btn-de-success" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalSmall{{ $data->id_pesanan }}"><i
-                                                            class="ti ti-truck-delivery"></i>Kirim Produk</button>
-                                                @else
-                                                    @if ($data->dp_status=='dp')
+                                            <<td>
+                                                @if ($data->status == 2)
+                                                    {{-- Jika status 2 (onproses), tampilkan tombol Kirim Produk --}}
+                                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                        data-bs-target="#modalKirim{{ $data->id_pesanan }}">
+                                                        <i class="ti ti-truck-delivery"></i> Kirim Produk
+                                                    </button>
+                                            
+                                                    <!-- Modal Kirim Produk -->
+                                                    <div class="modal fade" id="modalKirim{{ $data->id_pesanan }}" tabindex="-1"
+                                                        role="dialog" aria-labelledby="modalLabel{{ $data->id_pesanan }}" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="{{ route('admin.pesanan_kirim') }}" method="post" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="modal-body text-center">
+                                                                        <div class="mb-3">
+                                                                            <label for="resi{{ $data->id_pesanan }}">Nomor Resi JNE</label>
+                                                                            <input type="text" name="resi" class="form-control"
+                                                                                id="resi{{ $data->id_pesanan }}" placeholder="Nomor Resi" required>
+                                                                            <input type="hidden" name="id_pesanan" value="{{ $data->id_pesanan }}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-de-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                                                                        <button type="submit" class="btn btn-de-primary btn-sm">Kirim Resi</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @elseif ($data->status == 3)
+                                                    <span class="badge bg-info">Dalam Pengiriman</span>
+                                                @elseif ($data->status == 4)
+                                                    <span class="badge bg-success">Pesanan Diterima</span>
+                                                @elseif ($data->tipe_pembayaran == 'dp')
+                                                    {{-- Logika untuk pesanan dengan sistem DP --}}
+                                                    @if ($data->dp_status == 'dp')
                                                         <a href="{{ route('admin.pesanan_tagihan', $data->id_pesanan) }}"
-                                                        class="btn btn-danger"><i
-                                                            class="ti ti-report-money"> Kirim Tagihan</i></a></td>
-                                                    @elseif ($data->dp_status=='tagihan')
-                                                        <span class="badge badge-outline-success">Tagihan Telah Dikirim</span>
-                                                    @elseif ($data->dp_status=='upload_lunas')
-                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#SisaModalCenter-{{ $data->id_pesanan }}">Cek Sisa Pembayaraan</button>
-                                                        &nbsp;&nbsp;
-                                                        <a href="{{ route ('admin.tolak_sisa', $data->id_pesanan) }}" style="color:red"><i class="ti ti-circle-x"></i>Tolak</a>
-                                                        &nbsp;&nbsp;
+                                                            class="btn btn-sm btn-warning"><i class="ti ti-report-money"></i> Kirim Tagihan</a>
+                                                    @elseif ($data->dp_status == 'tagihan')
+                                                        <span class="badge bg-warning">Tagihan Dikirim</span>
+                                                    @elseif ($data->dp_status == 'upload_lunas')
+                                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                            data-bs-target="#sisaModal{{ $data->id_pesanan }}">Cek Sisa</button>
+                                                        <a href="{{ route('admin.tolak_sisa', $data->id_pesanan) }}" class="btn btn-sm btn-outline-danger">Tolak</a>
                                                         <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalSmall{{ $data->id_pesanan }}" style="color:green"><i class="ti ti-check"></i>Kirim Produk</a>
-
-                                                        <div class="modal fade" id="SisaModalCenter-{{ $data->id_pesanan }}"
-                                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                                                            aria-hidden="true">
+                                                            data-bs-target="#modalKirim{{ $data->id_pesanan }}" class="btn btn-sm btn-success">Kirim Produk</a>
+                                            
+                                                        <!-- Modal Cek Sisa Pembayaran -->
+                                                        <div class="modal fade" id="sisaModal{{ $data->id_pesanan }}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="sisaLabel{{ $data->id_pesanan }}" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h6 class="modal-title m-0" id="exampleModalCenterTitle">Bukti
-                                                                            Pembayaran</h6>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
+                                                                        <h6 class="modal-title">Bukti Sisa Pembayaran</h6>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <!--end modal-header-->
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-3 text-center align-self-center">
-                                                                                <img src="/bukti_bayar/{{ $data->bukti_bayar_dp_lunas }}"
-                                                                                    alt="" class="img-fluid" data-action="zoom">
-                                                                            </div>
-                                                                            <!--end col-->
-                                                                            <div class="col-lg-9">
-                                                                                <h5>#PP00{{ $data->id_pesanan }}</h5>
-                                                                                <h5>Sisa Tagihan : {{ rupiah($data->total_dp) }}</h5>
-                                                                                <span class="badge bg-soft-secondary">Klik Gambar Untuk
-                                                                                    Zoom</span>
-                                                                            </div>
-                                                                            <!--end col-->
-                                                                        </div>
-                                                                        <!--end row-->
+                                                                    <div class="modal-body text-center">
+                                                                        <img src="/bukti_bayar/{{ $data->bukti_bayar_dp_lunas }}" class="img-fluid mb-2" alt="Bukti">
+                                                                        <h6>Sisa Tagihan: {{ rupiah($data->total_dp) }}</h6>
+                                                                        <p class="text-muted">Klik gambar untuk zoom jika diperlukan.</p>
                                                                     </div>
-                                                                    <!--end modal-body-->
-                                                                    <!--end modal-footer-->
                                                                 </div>
-                                                                <!--end modal-content-->
                                                             </div>
-                                                            <!--end modal-dialog-->
                                                         </div>
-                                                    @elseif ($data->dp_status=='sisa tolak')
-                                                        <span class="badge badge-outline-success">Tagihan Telah Dikirim</span>
+                                                    @elseif ($data->dp_status == 'sisa tolak')
+                                                        <span class="badge bg-danger">Sisa Pembayaran Ditolak</span>
                                                     @endif
+                                                @else
+                                                    <span class="badge bg-secondary">Menunggu Pembayaran</span>
                                                 @endif
                                             </td>
                                             <td>

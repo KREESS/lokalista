@@ -59,6 +59,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
 
+    Route::prefix('admin')->name('admin.')->group(function ()
+        {
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+        Route::post('users/toggle/{user}', [App\Http\Controllers\Admin\UserController::class, 'toggle'])->name('users.toggle');
+    });
+    
+
     Route::get('/admin/profile', [ProfileAdminController::class, 'index'])->name('admin.profile');
     Route::put('/admin/profile/data/{profile}', [ProfileAdminController::class, 'update_data'])->name('admin.profile_data_update');
     Route::put('/admin/profile/password/{profile}', [ProfileAdminController::class, 'update_password'])->name('admin.profile_password_update');
@@ -74,6 +81,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/pesanan_masuk/terima/{pesanan}', [PesananAdminController::class, 'terima_pesanan'])->name('admin.pesanan_terima');
     Route::get('/admin/pesanan_masuk/tolak/{pesanan}', [PesananAdminController::class, 'tolak_pesanan'])->name('admin.pesanan_tolak');
 
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // Route lainnya ...
+        Route::get('/pesanan/hapus/{id}', [PesananAdminController::class, 'hapus_pesanan'])->name('pesanan_hapus');
+    });
+    
     Route::get('/admin/pesanan_prosess', [PesananAdminController::class, 'pesanan_onprosses'])->name('admin.pesanan_prosses');
 
     Route::get('/admin/pesanan_invoice/{pesanan}', [PesananAdminController::class, 'invoice'])->name('admin.pesanan_invoice');
@@ -106,7 +118,9 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
     Route::put('/customer/profile/foto/{profile}', [ProfileCustomerController::class, 'update_foto'])->name('customer.profile_foto_update');
 
     Route::get('/customer/produk', [ProdukCustomerController::class, 'index'])->name('customer.produk');
+    Route::get('/customer/produk/detail/{id}', [ProdukCustomerController::class, 'detail_produk'])->name('customer.produk.detail');
     Route::get('/customer/produk/detail/{produk}', [ProdukCustomerController::class, 'detail_produk'])->name('customer.produk_detail');
+    Route::get('/customer/produk/search', [ProdukCustomerController::class, 'search'])->name('customer.search');
     Route::get('/customer/produk/kategori/{produk}', [ProdukCustomerController::class, 'search_kategori'])->name('customer.produk_kategori');
 
     Route::get('/customer/keranjang', [KeranjangCustomerController::class, 'index'])->name('customer.keranjang');
@@ -114,7 +128,7 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
     Route::put('/customer/keranjang/{keranjang}', [KeranjangCustomerController::class, 'update'])->name('customer.keranjang_update');
     Route::delete('/customer/keranjang/{keranjang}', [KeranjangCustomerController::class, 'delete'])->name('customer.keranjang_delete');
 
-    Route::get('/customer/checkout/{checkout}', [CheckoutCustomerController::class, 'index'])->name('customer.checkout');
+    Route::get('/customer/checkout/{id_keranjang}', [CheckoutCustomerController::class, 'index'])->name('customer.checkout');
 
     Route::resource('/customer/alamat', AlamatUserController::class);
 

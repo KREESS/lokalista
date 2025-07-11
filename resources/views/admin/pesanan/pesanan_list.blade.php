@@ -58,12 +58,12 @@
                                     <tr>
                                         <td>#PP00{{ $data->id_pesanan }}</td>
                                         <td>
-                                        @if($data->foto_produk)
-                                            <img src="/produk/{{ $data->foto_produk }}" class="thumb-sm rounded-circle me-2">
-                                            {{ Str::title($data->nama_produk) }}
-                                        @else
-                                            <span class="text-danger">Produk tidak ditemukan</span>
-                                        @endif
+                                            @if($data->foto_produk)
+                                                <img src="/produk/{{ $data->foto_produk }}" class="thumb-sm rounded-circle me-2">
+                                                {{ Str::title($data->nama_produk) }}
+                                            @else
+                                                <span class="text-danger">Produk tidak ditemukan</span>
+                                            @endif
                                         </td>
                                         <td>{{ $data->quantity }} / Pcs</td>
                                         <td>{{ rupiah($data->total_ongkir) }}</td>
@@ -80,6 +80,9 @@
                                             </a> |
                                             <a href="{{ route('admin.pesanan_tolak', $data->id_pesanan) }}" style="color:red">
                                                 <i class="ti ti-circle-x"></i> Tolak
+                                            </a> |
+                                            <a href="javascript:void(0)" class="btn-hapus" data-url="{{ route('admin.pesanan_hapus', $data->id_pesanan) }}" style="color:orange">
+                                                <i class="ti ti-trash"></i> Hapus
                                             </a>
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('d-M-Y') }}</td>
@@ -130,6 +133,9 @@
 @section('js')
     <script src="/js/zoom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @section('js')
+    <script src="/js/zoom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.btn-terima').forEach(function (btn) {
@@ -145,6 +151,28 @@
                         confirmButtonColor: '#198754',
                         cancelButtonColor: '#d33',
                         confirmButtonText: 'Ya, Terima',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url;
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('.btn-hapus').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = this.dataset.url;
+
+                    Swal.fire({
+                        title: 'Yakin ingin menghapus pesanan?',
+                        text: "Data akan dihapus secara permanen!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, Hapus!',
                         cancelButtonText: 'Batal'
                     }).then((result) => {
                         if (result.isConfirmed) {

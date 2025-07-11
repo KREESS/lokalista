@@ -7,11 +7,10 @@
         <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0">
             <!-- Top Search Bar -->
             <div class="app-search-topbar">
-                <form action="#" method="get">
-                    <input type="search" name="search" class="from-control top-search mb-0"
-                        placeholder="Type text...">
+                <form action="{{ route('customer.search') }}" method="GET">
+                    <input type="search" name="search" class="form-control top-search mb-0" placeholder="Cari produk...">
                     <button type="submit"><i class="ti ti-search"></i></button>
-                </form>
+                </form>                
             </div>
         </div>
     </li>
@@ -368,7 +367,7 @@
                 </a>
 
             </li>
-            @php
+            {{-- @php
                 $notif_chat = DB::Table('chat')
                     ->where('to_id', Auth::user()->id)
                     ->where('status', 'off read')
@@ -380,7 +379,7 @@
                     @if ($notif_chat->count() > 0)
                         <span class="badge bg-danger">{{ $notif_chat->count() }}</span>
                     @endif
-                </a>
+                </a> --}}
 
             </li>
             <!--end nav-item-->

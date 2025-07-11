@@ -280,9 +280,11 @@
 
                     <!-- Data dinamis dari keranjang -->
                     @foreach ($keranjang as $item)
-                        <input type="hidden" name="id_produk[]" value="{{ $item['id_produk'] }}">
-                        <input type="hidden" name="quantity[]" value="{{ $item['quantity'] }}">
-                    @endforeach
+                    <input type="hidden" name="id_produk[]" value="{{ $item->id_produk }}">
+                    <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
+                    <input type="hidden" name="id_keranjang[]" value="{{ $item->id_keranjang }}">
+                @endforeach
+                
 
                     <!-- Data tetap -->
                     <input type="hidden" name="total_bayar" value="{{ $total_bayar }}">

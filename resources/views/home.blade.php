@@ -120,82 +120,69 @@
                 </div>
             </div>
         </div>
+        <style>
+            .produk-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .produk-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+        </style>
+        <section style="background-color: #ff770036; border-radius: 30px;">
+            <div class="container py-5">
+              <div class="row">
+                <!-- Produk -->
+                <div class="col-md-14">
+                    <div class="row">
+                        @php
+                            function rupiah($angka) {
+                                return 'Rp ' . number_format($angka, 2, ',', '.');
+                            }
+                        @endphp
+                    @forelse ($produk as $data)
+                        <div class="col-md-3 mb-3 d-flex align-items-stretch">
+                            <div style="border-radius: 30px;" class="card produk-card shadow-sm rounded-lg border-0 w-100">
+                                <div class="d-flex justify-content-between p-3">
+                                    <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong" style="width: 35px; height: 35px;">
+                                    </div>
+                                </div>
+                                <!-- Gambar Produk -->
+                                <div class="overflow-hidden rounded-top">
+                                    <img src="/produk/{{ $data->foto_produk }}" alt="{{ $data->nama_produk }}" class="card-img-top produk-img" height="180">
+                                </div>
 
-            <style>
-                #grid .picture-item {
-                    padding: 10px;
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                }
-            
-                #grid .picture-item img {
-                    border-radius: 15px;
-                    transition: transform 0.3s ease;
-                    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                }
-            
-                #grid .picture-item:hover img {
-                    transform: scale(1.05);
-                    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-                }
-            </style>
-            
-            <section style="background-color: #eee;">
-                <div class="container py-5">
-                  <div class="row">
-                    <!-- Produk -->
-                    <div class="col-md-14">
-                        <div class="row">
-                            @php
-                                function rupiah($angka) {
-                                    return 'Rp ' . number_format($angka, 2, ',', '.');
-                                }
-                            @endphp
-    
-                        @forelse ($produk as $data)
-                            <div class="col-md-3 mb-3 d-flex align-items-stretch">
-                                <div style="border-radius: 30px;" class="card produk-card shadow-sm rounded-lg border-0 w-100">
-                                    <div class="d-flex justify-content-between p-3">
-                                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong" style="width: 35px; height: 35px;">
-                                            <p class="text-white mb-0 small">x3</p>
-                                        </div>
+                                <div class="card-body d-flex flex-column">
+                                    <!-- Kategori Produk -->
+                                    <p class="small"><a href="#!" class="text-muted">{{ Str::title($data->nama_kategori) }}</a></p>
+
+                                    <!-- Nama Produk dan Link ke Detail -->
+                                    <a href="{{ route('customer.dashboard_detail', $data->id_produk) }}" class="h6 text-dark text-decoration-none mb-2">
+                                        {{ Str::title($data->nama_produk) }}
+                                    </a>
+
+                                    <!-- Harga Asli dan Harga Diskon -->
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <p class="small text-danger"><s>{{ rupiah($data->harga_produk) }}</s></p>
+                                        <h5 class="text-warning fw-bold mt-auto">{{ rupiah($data->harga_produk) }}</h5>
                                     </div>
-                                    <!-- Gambar Produk -->
-                                    <div class="overflow-hidden rounded-top">
-                                        <img src="/produk/{{ $data->foto_produk }}" alt="{{ $data->nama_produk }}" class="card-img-top produk-img" height="180">
-                                    </div>
-    
-                                    <div class="card-body d-flex flex-column">
-                                        <!-- Kategori Produk -->
-                                        <p class="small"><a href="#!" class="text-muted">{{ Str::title($data->nama_kategori) }}</a></p>
-    
-                                        <!-- Nama Produk dan Link ke Detail -->
-                                        <a href="{{ route('home.produk_detail', $data->id_produk) }}" class="h6 text-dark text-decoration-none mb-2">
-                                            {{ Str::title($data->nama_produk) }}
-                                        </a>
-    
-                                        <!-- Harga Asli dan Harga Diskon -->
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <p class="small text-danger"><s>{{ rupiah($data->harga_produk) }}</s></p>
-                                            <h5 class="text-warning fw-bold mt-auto">{{ rupiah($data->harga_produk) }}</h5>
-                                        </div>
-    
-                                        <!-- Tombol untuk Melihat Produk -->
-                                        <a href="{{ route('home.produk_detail', $data->id_produk) }}" style="color: #ff7700" class="btn btn-lihat btn-sm mt-3 rounded-pill">
-                                            Lihat Produk
-                                        </a>
-                                    </div>
+                                    <!-- Tombol untuk Melihat Produk -->
+                                    <a href="{{ route('customer.produk_detail', $data->id_produk) }}" style="color: #ff7700" class="btn btn-lihat btn-sm mt-3 rounded-pill">
+                                        Lihat Produk
+                                    </a>
                                 </div>
                             </div>
-                            @empty
-                                <div class="alert alert-outline-danger" role="alert">
-                                    <strong>Maaf </strong> Produk Saat ini Tidak Tersedia.
-                                </div>
-                            @endforelse
                         </div>
-                    </div>
+                        @empty
+                            <div class="alert alert-outline-danger" role="alert">
+                                <strong>Maaf </strong> Produk Saat ini Tidak Tersedia.
+                            </div>
+                        @endforelse
                     </div>
                 </div>
-            </section>
+            </div>
+            </div>
+        </section>   
     </div>
 @endsection
 @include('live-chat')

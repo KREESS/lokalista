@@ -93,34 +93,53 @@ class CheckoutCustomerController extends Controller
     //     }
     // }
 
-    public function index()
-    {
-        $userId = Auth::user()->id;
+    public function index($id_keranjang)
+{
+    $userId = Auth::id();
 
-        // Cek alamat user
-        $pengiriman = Alamat::where('id_user', $userId)->first();
-        if (!$pengiriman) {
-            return redirect()->route('alamat.create')->with('error', 'Harap lengkapi alamat pengiriman terlebih dahulu.');
-        }
-
-        // Ambil data keranjang
-        $keranjang = Keranjang::join('produk', 'produk.id_produk', '=', 'keranjang.id_produk')
-            ->select('keranjang.*', 'produk.nama_produk', 'produk.harga_produk', 'produk.foto_produk', 'produk.berat')
-            ->where('keranjang.id_user', $userId)
-            ->get();
-
-        $berat_total = $keranjang->sum(function ($item) {
-            return $item->berat * $item->quantity;
-        });
-
-        $id_kota = $pengiriman->id_kota;
-        $ongkir = $this->get_ongkir($id_kota, $berat_total);
-
-        // Ambil pesanan terakhir user (jika ada)
-        $pesanan = Pesanan::where('id_user', $userId)->latest()->first();
-
-        return view('customer.checkout.checkout', compact('keranjang', 'ongkir', 'berat_total', 'pengiriman', 'pesanan'));
+    // Cek alamat user
+    $pengiriman = Alamat::where('id_user', $userId)->first();
+    if (!$pengiriman) {
+        return redirect()->route('alamat.create')->with('error', 'Harap lengkapi alamat pengiriman terlebih dahulu.');
     }
+
+    // Ambil hanya keranjang yang sesuai id & user
+    $keranjang = Keranjang::join('produk', 'produk.id_produk', '=', 'keranjang.id_produk')
+        ->select('keranjang.*', 'produk.nama_produk', 'produk.harga_produk', 'produk.foto_produk', 'produk.berat')
+        ->where('keranjang.id_user', $userId)
+        ->where('keranjang.id_keranjang', $id_keranjang)
+        ->get();
+
+    // Jika tidak ditemukan
+    if ($keranjang->isEmpty()) {
+        return redirect()->route('customer.keranjang')->with('gagal', 'Produk tidak ditemukan di keranjang Anda.');
+    }
+
+    $berat_total = $keranjang->sum(fn($item) => $item->berat * $item->quantity);
+    $id_kota = $pengiriman->id_kota;
+    $ongkir = $this->get_ongkir($id_kota, $berat_total);
+
+    return view('customer.checkout.checkout', compact('keranjang', 'ongkir', 'berat_total', 'pengiriman'));
+}
+
+public function proses(Request $request)
+{
+    $produk_ids = $request->input('id_produk', []);
+    $quantities = $request->input('quantity', []);
+    $keranjang_ids = $request->input('id_keranjang', []);
+
+    foreach ($produk_ids as $index => $id_produk) {
+        $quantity = $quantities[$index];
+        $keranjang_id = $keranjang_ids[$index];
+
+        // Kurangi stok, buat pesanan, dll
+        // Kemudian tandai keranjang sebagai "dibayar"
+        Keranjang::where('id_keranjang', $keranjang_id)->update(['status' => 'dibayar']);
+    }
+
+    return redirect()->route('customer.keranjang')->with('success', 'Checkout berhasil!');
+}
+
 
     // CONTROLLER AWAL DIBAWAH
 

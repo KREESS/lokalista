@@ -78,6 +78,13 @@ class PesananAdminController extends Controller
         return view('admin.invoice.invoice', compact(['pesanan']));
     }
 
+    public function hapus_pesanan($id)
+    {
+        Pesanan::destroy($id);
+        return back()->with('success', 'Pesanan berhasil dihapus.');
+    }
+    
+
     public function pesanan_kirim(Request $request)
     {
         Resi::create([

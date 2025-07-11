@@ -374,6 +374,13 @@
                 </ul>
                 <!--end submenu-->
             </li>
+            
+            <li class="nav-item dropdown parent-menu-item">
+                <a class="nav-link" href="{{ route('admin.users.index') }}">
+                    <span><i class="ti ti-file-report menu-icon"></i>Manage User</span>
+                </a>
+            </li>
+            
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarApps" data-bs-toggle="dropdown"

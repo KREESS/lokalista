@@ -94,8 +94,10 @@
                                                     @endphp
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('customer.checkout', $item->id_keranjang) }}" class="text-primary">Checkout <i class="fas fa-long-arrow-alt-right ml-1"></i></a>
-                                                </td>
+                                                    <a href="{{ route('customer.checkout', $item->id_keranjang) }}" class="text-primary">
+                                                        Checkout <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                                                    </a>
+                                                                                                    </td>
                                                 <td>
                                                     <a href="{{ route('customer.keranjang_delete', $item->id_keranjang) }}" style="color:red" onclick="event.preventDefault(); document.getElementById('keranjang-form-{{ $item->id_keranjang }}').submit();">
                                                         <i class="ti ti-trash"></i> Hapus

@@ -40,15 +40,25 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $input = $request->all();
+{
+    $input = $request->all();
 
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+    // Cek apakah email ada
+    $user = \App\Models\User::where('email', $input['email'])->first();
+
+    if ($user) {
+        if (!$user->is_active) {
+            return redirect()->route('login')
+                ->with('error', 'Akun Anda telah dinonaktifkan. Silakan hubungi admin.');
+        }
+
+        // Login jika aktif
+        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
             if (auth()->user()->type == 'super admin') {
                 return redirect()->route('superadmin.dashboard');
             } elseif (auth()->user()->type == 'admin') {
@@ -56,9 +66,11 @@ class LoginController extends Controller
             } else {
                 return redirect()->route('customer.dashboard');
             }
-        } else {
-            return redirect()->route('login')
-                ->with('error', 'Email atau Password Salah, Mohon Coba Lagi.');
         }
     }
+
+    return redirect()->route('login')
+        ->with('error', 'Email atau Password Salah, Mohon Coba Lagi.');
+}
+
 }
