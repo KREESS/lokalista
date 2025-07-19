@@ -43,11 +43,18 @@
         @endphp
         <div class="row">
             <div class="col-lg-12">
-                @if (session('gagal'))
-                <div class="alert alert-danger border-0" role="alert">
-                    {{ session('gagal') }}
-                </div>
-                @endif
+                <div class="col-lg-12">
+                    @if (session('success'))
+                        <div class="alert alert-success border-0" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                
+                    @if (session('gagal'))
+                        <div class="alert alert-danger border-0" role="alert">
+                            {{ session('gagal') }}
+                        </div>
+                    @endif
                 <div class="card">
                     <!--end card-header-->
                     <div class="card-body">
@@ -94,19 +101,23 @@
                                                     @endphp
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('customer.checkout', $item->id_keranjang) }}" class="text-primary">
+                                                    <a href="{{ route('customer.checkout', $item->id_keranjang) }}" class="btn btn-sm btn-warning">
                                                         Checkout <i class="fas fa-long-arrow-alt-right ml-1"></i>
                                                     </a>
-                                                                                                    </td>
+                                                </td>
                                                 <td>
-                                                    <a href="{{ route('customer.keranjang_delete', $item->id_keranjang) }}" style="color:red" onclick="event.preventDefault(); document.getElementById('keranjang-form-{{ $item->id_keranjang }}').submit();">
-                                                        <i class="ti ti-trash"></i> Hapus
-                                                    </a>
+                                                    <!-- Form untuk submit delete, tersembunyi -->
                                                     <form id="keranjang-form-{{ $item->id_keranjang }}" action="{{ route('customer.keranjang_delete', $item->id_keranjang) }}" method="POST" class="d-none">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
-                                                </td>
+                                                
+                                                    <!-- Tombol Hapus dengan konfirmasi -->
+                                                    <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{ $item->id_keranjang }})">
+                                                        <i class="ti ti-trash"></i> Hapus
+                                                    </button>
+                                                </td>                                                
+                                                
                                             </tr>
                                         @endforeach
                                     @else
@@ -130,11 +141,37 @@
 @endsection
 
 @section('js')
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script>
          window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
                 $(this).remove();
             });
         }, 2500);
-    </script>
+    </script> --}}
+        <script>
+            function confirmDelete(id) {
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Produk ini akan dihapus dari keranjang!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('keranjang-form-' + id).submit();
+                    }
+                })
+            }
+        
+            // Auto hide alert success
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 2500);
+        </script>
 @endsection

@@ -76,9 +76,11 @@
                                             <td><span class="badge bg-success">Selesai</span></td>
                                             <td>{{ rupiah($pesanan->total_ongkir) }}</td>
                                             <td>
-                                                <a href="{{ route('admin.pesanan_invoice', $pesanan->id_pesanan) }}"
-                                                    target="_blank" class="btn btn-sm btn-secondary"><i
-                                                        class="ti ti-file-invoice"> Invoice</i></a>
+                                                <a href="{{ route('customer.pesanan_invoice', $pesanan->id_pesanan) }}"
+                                                    target="_blank" class="btn btn-sm btn-secondary">
+                                                    <i class="ti ti-file-invoice"> Invoice</i>
+                                                </a>                                                
+                                                 
                                             </td>
                                         </tr>
                                     @endforeach

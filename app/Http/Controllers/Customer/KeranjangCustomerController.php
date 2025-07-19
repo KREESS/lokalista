@@ -77,7 +77,7 @@ class KeranjangCustomerController extends Controller
     public function delete($id)
     {
         Keranjang::find($id)->delete();
-        return back()->with('gagal', 'Berhasil Menghapus Produk Dari Keranjang');
-    }
+    return back()->with('success', 'Produk berhasil dihapus dari keranjang!');
+}
 
 }

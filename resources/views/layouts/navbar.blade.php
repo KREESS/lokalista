@@ -142,8 +142,8 @@
     </style>
 
     
-    <li class="dropdown">
-        <a class="nav-link font-14" href="{{ route('login') }}">
+    <li class="dropdown"> 
+        <a class="nav-link font-14" style="color: #fff" href="{{ route('login') }}">
             <span><i class="ti ti-user menu-icon"></i>Masuk</span>
         </a>
     </li>

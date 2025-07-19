@@ -131,7 +131,9 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
     Route::get('/customer/checkout/{id_keranjang}', [CheckoutCustomerController::class, 'index'])->name('customer.checkout');
 
     Route::resource('/customer/alamat', AlamatUserController::class);
+    Route::delete('/customer/pesanan/{id}', [PesananCustomerController::class, 'destroy'])->name('customer.pesanan.destroy');
 
+    Route::post('/midtrans/token', [PesananCustomerController::class, 'getSnapToken'])->name('midtrans.token');
     Route::get('/customer/pesanan', [PesananCustomerController::class, 'index'])->name('customer.pesanan');
     Route::post('/customer/pesanan/store', [PesananCustomerController::class, 'store_pesanan'])->name('customer.pesanan_store');
     Route::get('/customer/pesanan/upload_ulang/{pesanan}', [PesananCustomerController::class, 'upload_ulang'])->name('customer.upload_ulang');

@@ -40,7 +40,7 @@
                     <div class="card-body invoice-head">
                         <div class="row">
                             <div class="col-md-4 align-self-center">
-                                <img src="/lokaslista/logo1.png" alt="logo-small" class="logo-sm me-1" height="40">
+                                <img src="/lokalista/Logooren.png" alt="logo-small" class="logo-sm me-1" height="40">
                                 <img src="assets/images/logo.png" alt="logo-large" class="logo-lg brand-light"
                                     height="16">
                                 <p class="mt-2 mb-0 text-muted">Invoice Pesanan Kode #PP00{{ $pesanan->id_pesanan }}</p>

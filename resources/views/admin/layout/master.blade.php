@@ -25,6 +25,7 @@
 
 </head>
 
+@stack('scripts')
 <body data-layout="horizontal" class="">
     <!-- leftbar-tab-menu -->
 

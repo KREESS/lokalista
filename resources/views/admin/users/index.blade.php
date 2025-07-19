@@ -8,20 +8,25 @@
     <h5>Daftar Admin</h5>
     <!-- Tombol Tambah Admin -->
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">+ Tambah Admin</button>
+
+    <div class="mb-2">
+        <input type="text" id="searchAdmin" class="form-control" placeholder="Cari admin...">
+    </div>
+
     <div class="table-responsive">
-                            <table class="table" id="table-datatables">
-                                <thead class="thead-light">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Tipe</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users->where('type', 'admin')->values() as $i => $user)
+        <table class="table" id="table-admin">
+            <thead class="thead-light">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Tipe</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users->where('type', 'admin')->values() as $i => $user)
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td>{{ $user->name }}</td>
@@ -29,9 +34,9 @@
                     <td>{{ ucfirst($user->type) }}</td>
                     <td>
                         @if($user->is_active)
-                            <span class="badge bg-success">Sedang Aktif</span>
+                        <span class="badge bg-success">Sedang Aktif</span>
                         @else
-                            <span class="badge bg-secondary">Offline</span>
+                        <span class="badge bg-secondary">Offline</span>
                         @endif
                     </td>
                     <td>
@@ -78,27 +83,32 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <!-- ========================= TABEL CUSTOMER ========================= -->
-    <h5>Daftar Customer</h5>
+    <h5 class="mt-5">Daftar Customer</h5>
+
+    <div class="mb-2">
+        <input type="text" id="searchCustomer" class="form-control" placeholder="Cari customer...">
+    </div>
+
     <div class="table-responsive">
-                            <table class="table" id="table-datatables">
-                                <thead class="thead-light">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Tipe</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users->where('type', 'customer')->values() as $i => $user)
+        <table class="table" id="table-customer">
+            <thead class="thead-light">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Tipe</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users->where('type', 'customer')->values() as $i => $user)
                 <tr>
                     <td>{{ $i + 1 }}</td>
                     <td>{{ $user->name }}</td>
@@ -118,9 +128,9 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -156,3 +166,31 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchAdmin = document.getElementById("searchAdmin");
+        const adminTable = document.querySelector("#table-admin tbody");
+
+        searchAdmin.addEventListener("keyup", function () {
+            const value = this.value.toLowerCase();
+            const rows = adminTable.querySelectorAll("tr");
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+            });
+        });
+
+        const searchCustomer = document.getElementById("searchCustomer");
+        const customerTable = document.querySelector("#table-customer tbody");
+
+        searchCustomer.addEventListener("keyup", function () {
+            const value = this.value.toLowerCase();
+            const rows = customerTable.querySelectorAll("tr");
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+            });
+        });
+    });
+</script>
+@endpush

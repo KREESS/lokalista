@@ -110,6 +110,12 @@ class PesananCustomerController extends Controller
         return to_route('customer.pesanan');
     }
 
+    public function destroy($id)
+{
+    Pesanan::destroy($id);
+    return back()->with('success', 'Pesanan berhasil dihapus.');
+}
+
     public function upload_ulang($id)
     {
         $cek_alamat = Alamat::where('id_user', Auth::user()->id)->first();

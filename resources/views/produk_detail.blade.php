@@ -137,14 +137,17 @@
                                     </ul>
                                     {{-- <h3 class="font-14 text-primary">Stok : {{ $produk->stok }} Pcs (Tersedia)</h3> --}}
                                     <div class="mt-3">
-                                        <input class="form-control form-control d-inline-block" style="width:100px;"
-                                            type="number" name="quantity" min="1" value="1"
-                                            id="example-number-input">
-                                        <input type="text" name="id_produk" id=""
-                                            value="{{ $produk->id_produk }}" hidden>
-                                        <button type="button" class="btn btn-de-primary btn px-4 d-inline-block" 
-                                            onclick="executeExample('error')" ><i class="mdi mdi-cart me-2"></i>Masukan
-                                            Keranjang</button>
+                                        <input class="form-control me-3 d-inline-block" style="width:100px;"
+       type="number" name="quantity" min="1" value="1" id="example-number-input">
+
+<input type="hidden" name="id_produk" value="{{ $produk->id_produk }}">
+
+<button type="button" class="btn btn-primary px-4 d-inline-block"
+        style="background-color: #EDA752; border: none; color: white; transition: 0.3s;"
+        onclick="executeExample('error')">
+    <i class="mdi mdi-cart me-2"></i>Masukan Keranjang
+</button>
+
                                     </div>
                                 </div>
                             </div>

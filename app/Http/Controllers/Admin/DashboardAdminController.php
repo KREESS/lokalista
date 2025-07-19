@@ -13,29 +13,33 @@ class DashboardAdminController extends Controller
 {
     public function index()
     {
+        // Total customer (selain admin yang login)
         $total_customer = DB::table('users')
             ->where('id', '!=', Auth::id())
             ->count();
+    
+            $whereStatus = ['3', '4', 'lunas'];
 
-        $total_penjualan = DB::table('pesanan')
-            ->where('status', 'lunas')
-            ->count();
-
-        $total_pendapatan = DB::table('pesanan')
-            ->where('status', 'lunas')
-            ->sum('harga_total_bayar');
-
-        $total_produk = DB::table('pesanan')
-            ->where('status', 'lunas')
-            ->sum('quantity');
-
-        $data_produk = DB::table('pesanan')
-            ->join('produk', 'produk.id_produk', '=', 'pesanan.id_produk')
-            ->where('pesanan.status', 'lunas')
-            ->select('produk.nama_produk', DB::raw('SUM(pesanan.quantity) as total_quantity'))
-            ->groupBy('produk.nama_produk')
-            ->get();
-
+            $total_penjualan = DB::table('pesanan')
+                ->whereIn('status', $whereStatus)
+                ->count();
+            
+            $total_pendapatan = DB::table('pesanan')
+                ->whereIn('status', $whereStatus)
+                ->sum('harga_total_bayar');
+            
+            $total_produk = DB::table('pesanan')
+                ->whereIn('status', $whereStatus)
+                ->sum('quantity');
+            
+            $data_produk = DB::table('pesanan')
+                ->join('produk', 'produk.id_produk', '=', 'pesanan.id_produk')
+                ->whereIn('pesanan.status', $whereStatus)
+                ->select('produk.nama_produk', DB::raw('SUM(pesanan.quantity) as total_quantity'))
+                ->groupBy('produk.nama_produk')
+                ->orderByDesc('total_quantity')
+                ->get();            
+    
         return view('admin.dashboard.dashboard', compact(
             'total_customer',
             'total_penjualan',

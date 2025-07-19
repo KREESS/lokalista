@@ -104,12 +104,89 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script>
+    const namaLaporan = @json($nama_laporan ?? 'Lokalista All Reports');
+</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#table-datatables').DataTable({
             dom: 'Bfrtip',
-            buttons: ['pdf', 'print']
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    text: 'Export PDF',
+                    filename: namaLaporan,
+                    orientation: 'portrait',
+                    pageSize: 'A4',
+                    title: '',
+                    customize: function (doc) {
+                        // 1. Kop surat
+                        doc.content.splice(0, 0, {
+                            alignment: 'center',
+                            margin: [0, 0, 0, 10],
+                            stack: [
+                                { text: 'KOPERASI UMKM INDRAMAYU', fontSize: 16, bold: true },
+                                { text: 'Jl. MT Haryono No. 11/B - Sindang, Indramayu', fontSize: 10 },
+                                { text: 'Telp: (021) 1234567 | Email: info@koperasims.id', fontSize: 10 },
+                                {
+                                    canvas: [{ type: 'line', x1: 0, y1: 5, x2: 515, y2: 5, lineWidth: 1 }],
+                                    margin: [0, 5, 0, 5]
+                                },
+                                { text: 'LAPORAN PENJUALAN', fontSize: 14, bold: true, margin: [0, 10, 0, 10] }
+                            ]
+                        });
+
+                        // 2. Tanggal hari ini (Indonesia)
+                        const now = new Date();
+                        const formattedDate = now.toLocaleDateString('id-ID', {
+                            day: '2-digit', month: 'long', year: 'numeric'
+                        });
+
+                        // 3. Tanda tangan formal
+                        doc.content.push({
+                            margin: [0, 50, 0, 0],
+                            columns: [
+                                {
+                                    width: '*',
+                                    alignment: 'center',
+                                    stack: [
+                                        { text: `Indramayu, ${formattedDate}`, fontSize: 11, italics: true, margin: [0, 0, 0, 40] },
+                                        { text: 'Admin Koperasi', fontSize: 11, bold: true },
+                                        { text: '(____________________)', fontSize: 11, margin: [0, 40, 0, 0] }
+                                    ]
+                                },
+                                {
+                                    width: '*',
+                                    alignment: 'center',
+                                    stack: [
+                                        { text: '', fontSize: 11, margin: [0, 0, 0, 40] },
+                                        { text: 'Ketua Koperasi', fontSize: 11, bold: true },
+                                        { text: '(____________________)', fontSize: 11, margin: [0, 40, 0, 0] }
+                                    ]
+                                }
+                            ]
+                        });
+
+                        // 4. Rapiin tabel
+                        const tableIndex = doc.content.findIndex(item => item.table);
+                        if (tableIndex !== -1) {
+                            doc.content[tableIndex].layout = {
+                                hLineWidth: () => 0.5,
+                                vLineWidth: () => 0.5,
+                                hLineColor: () => '#aaa',
+                                vLineColor: () => '#aaa',
+                                paddingLeft: () => 4,
+                                paddingRight: () => 4,
+                                paddingTop: () => 2,
+                                paddingBottom: () => 2,
+                            };
+                            doc.content[tableIndex].table.widths = ['*', '*', '*', '*', '*', '*'];
+                        }
+                    }
+                },
+                'print'
+            ]
         });
     });
 </script>

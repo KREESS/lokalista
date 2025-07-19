@@ -12,7 +12,7 @@
 
     <!-- App favicon -->
     <title>Lokalista</title>
-    <link rel="shortcut icon" href="/lokalista/logo1.png">
+    <link rel="shortcut icon" href="/lokalista/LOGOoren.png">
     <!-- Favicon-->
     @yield('css')
 
@@ -28,6 +28,9 @@
     <link href="/metrica/dist/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/metrica/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/metrica/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 </head>
 

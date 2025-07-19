@@ -1,5 +1,5 @@
 <ul class="list-unstyled topbar-nav float-end mb-0">
-    <li class="dropdown hide-phone">
+    {{-- <li class="dropdown hide-phone">
         <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
             <i class="ti ti-search"></i>
@@ -14,7 +14,7 @@
                 </form>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     {{-- <li class="notification-list">
         <a class="nav-link arrow-none nav-icon offcanvas-btn" href="#" data-bs-toggle="offcanvas"

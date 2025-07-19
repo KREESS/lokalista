@@ -79,7 +79,19 @@
                                             <td>
                                                 {{ $data->status }}
                                             </td>
+                                            <td>
+                                                {{-- Tombol Hapus --}}
+                                                <form action="{{ route('customer.pesanan.destroy', $data->id_pesanan) }}" method="POST" style="display:inline-block;"
+                                                    onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
+                                        
                                     @endforeach
                                 </tbody>
                             </table>
