@@ -58,35 +58,48 @@
                             <table class="table" id="table-datatables">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>ID Pesanan</th>
                                         <th>Produk</th>
-                                        <th>Quantity</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
+                                        <th>Total</th>
                                         <th>Pengiriman</th>
-                                        <th>invoice</th>
-                                        <th>Tanggal Order</th>
+                                        <th>Invoice</th>
+                                        <th>Terakhir Diupdate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $totalPendapatan = 0; @endphp
                                     @foreach ($pesanan as $data)
+                                        @php
+                                            $subtotal = $data->quantity * $data->harga_produk;
+                                            $totalPendapatan += $subtotal;
+                                        @endphp
                                         <tr>
                                             <td>#PP00{{ $data->id_pesanan }}</td>
-                                            <td><img src="/produk/{{ $data->foto_produk }}" alt=""
-                                                    class="thumb-sm rounded-circle me-2">
-                                                {{ Str::title($data->nama_produk) }}</td>
-                                            <td>{{ $data->quantity }} / Pcs</td>
-                                            <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td>
-                                            <td><a href="{{ route('admin.pesanan_invoice', $data->id_pesanan) }}"
-                                                    target="_blank" class="btn btn-sm btn-secondary"><i
-                                                        class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
-                                                @php
-                                                    $date = date('d-M-Y', strtotime($data->updated_at));
-                                                    echo $date;
-                                                @endphp
+                                                <img src="/produk/{{ $data->foto_produk }}" alt="{{ $data->nama_produk }}" class="thumb-sm rounded-circle me-2">
+                                                {{ Str::title($data->nama_produk) }}
                                             </td>
+                                            <td>Rp{{ number_format($data->harga_produk, 0, ',', '.') }}</td>
+                                            <td>{{ $data->quantity }} / Pcs</td>
+                                            <td>Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
+                                            <td>{{ $data->nama_kota }} [{{ $data->nama_prov }}]</td>
+                                            <td>
+                                                <a href="{{ route('admin.pesanan_invoice', $data->id_pesanan) }}" target="_blank" class="btn btn-sm btn-secondary">
+                                                    <i class="ti ti-file-invoice"></i> Invoice
+                                                </a>
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('d M Y') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4" class="text-end">Total Pendapatan:</th>
+                                        <th colspan="4" class="text-start text-primary">Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</th>
+                                    </tr>
+                                </tfoot>     
                             </table>
 
                         </div>
@@ -116,6 +129,7 @@
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script>
     const namaLaporan = @json($nama_laporan);
+    const totalPendapatan = {{ $totalPendapatan ?? 0 }};
 </script>
 
 <script type="text/javascript">
@@ -131,69 +145,105 @@
                     pageSize: 'A4',
                     title: '',
                     customize: function (doc) {
-                        // 1. Kop surat
-                        doc.content.splice(0, 0, {
-                            alignment: 'center',
-                            margin: [0, 0, 0, 10],
-                            stack: [
-                                { text: 'KOPERASI UMKM INDRAMAYU', fontSize: 16, bold: true },
-                                { text: 'Jl. MT Haryono No. 11/B - Sindang, Indramayu', fontSize: 10 },
-                                { text: 'Telp: (021) 1234567 | Email: info@koperasims.id', fontSize: 10 },
-                                {
-                                    canvas: [{ type: 'line', x1: 0, y1: 5, x2: 515, y2: 5, lineWidth: 1 }],
-                                    margin: [0, 5, 0, 5]
-                                },
-                                { text: 'LAPORAN PENJUALAN', fontSize: 14, bold: true, margin: [0, 10, 0, 10] }
-                            ]
-                        });
+                // 1. Kop Surat
+                doc.content.splice(0, 0, {
+                    alignment: 'center',
+                    margin: [0, 0, 0, 10],
+                    stack: [
+                        { text: 'KOPERASI UMKM INDRAMAYU', fontSize: 16, bold: true },
+                        { text: 'Jl. MT Haryono No. 11/B - Sindang, Indramayu', fontSize: 10 },
+                        { text: 'Telp: (021) 1234567 | Email: info@koperasims.id', fontSize: 10 },
+                        {
+                            canvas: [{ type: 'line', x1: 0, y1: 5, x2: 515, y2: 5, lineWidth: 1 }],
+                            margin: [0, 5, 0, 5]
+                        },
+                        { text: 'LAPORAN PENJUALAN', fontSize: 14, bold: true, margin: [0, 10, 0, 10] }
+                    ]
+                });
 
-                        // 2. Tanggal hari ini (Indonesia)
-                        const now = new Date();
-                        const formattedDate = now.toLocaleDateString('id-ID', {
-                            day: '2-digit', month: 'long', year: 'numeric'
-                        });
+                // 2. Temukan tabel utama
+                const tableIndex = doc.content.findIndex(item => item.table);
+                if (tableIndex !== -1) {
+                    const table = doc.content[tableIndex].table;
 
-                        // 3. Tanda tangan formal
-                        doc.content.push({
-                            margin: [0, 50, 0, 0],
-                            columns: [
-                                {
-                                    width: '*',
-                                    alignment: 'center',
-                                    stack: [
-                                        { text: `Indramayu, ${formattedDate}`, fontSize: 11, italics: true, margin: [0, 0, 0, 40] },
-                                        { text: 'Admin Koperasi', fontSize: 11, bold: true },
-                                        { text: '(____________________)', fontSize: 11, margin: [0, 40, 0, 0] }
-                                    ]
-                                },
-                                {
-                                    width: '*',
-                                    alignment: 'center',
-                                    stack: [
-                                        { text: '', fontSize: 11, margin: [0, 0, 0, 40] },
-                                        { text: 'Ketua Koperasi', fontSize: 11, bold: true },
-                                        { text: '(____________________)', fontSize: 11, margin: [0, 40, 0, 0] }
-                                    ]
-                                }
-                            ]
-                        });
+                    // 3. Tambahkan kolom nomor ke header
+                    table.body[0].unshift({ text: 'No', bold: true });
 
-                        // 4. Rapiin tabel
-                        const tableIndex = doc.content.findIndex(item => item.table);
-                        if (tableIndex !== -1) {
-                            doc.content[tableIndex].layout = {
-                                hLineWidth: () => 0.5,
-                                vLineWidth: () => 0.5,
-                                hLineColor: () => '#aaa',
-                                vLineColor: () => '#aaa',
-                                paddingLeft: () => 4,
-                                paddingRight: () => 4,
-                                paddingTop: () => 2,
-                                paddingBottom: () => 2,
-                            };
-                            doc.content[tableIndex].table.widths = ['*', '*', '*', '*', '*', '*'];
-                        }
+                    // 4. Tambahkan nomor ke setiap baris data (mulai dari index 1 karena index 0 adalah header)
+                    for (let i = 1; i < table.body.length; i++) {
+                        table.body[i].unshift(i.toString());
+                        // Hapus kolom Invoice (kolom ke-7, indeks ke-7 karena sudah ditambahkan kolom nomor)
+                        table.body[i].splice(7, 1);
                     }
+
+                    // 5. Hapus juga header "Invoice"
+                    table.body[0].splice(7, 1);
+
+                    // 6. Atur ulang lebar kolom (sekarang 8 kolom)
+                    doc.content[tableIndex].table.widths = ['3%', '*', '*', '*', '*', '*', '*', '*'];
+
+                    // 7. Layout tabel
+                    doc.content[tableIndex].layout = {
+                        hLineWidth: () => 0.5,
+                        vLineWidth: () => 0.5,
+                        hLineColor: () => '#aaa',
+                        vLineColor: () => '#aaa',
+                        paddingLeft: () => 4,
+                        paddingRight: () => 4,
+                        paddingTop: () => 2,
+                        paddingBottom: () => 2,
+                    };
+
+                    // 8. Tambah Total Pendapatan di bawah tabel
+                    doc.content.splice(tableIndex + 1, 0, {
+                        margin: [0, 20, 0, 0],
+                        table: {
+                            widths: ['*', '*'],
+                            body: [
+                                [
+                                    { text: 'Total Pendapatan:', alignment: 'right', bold: true },
+                                    { text: 'Rp ' + totalPendapatan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'), alignment: 'left', bold: true }
+                                ]
+                            ]
+                        },
+                        layout: 'noBorders'
+                    });
+                }
+
+                // 9. Tambahkan tanda tangal
+                // Tanggal otomatis
+                const now = new Date();
+                const formattedDate = now.toLocaleDateString('id-ID', {
+                    day: '2-digit', month: 'long', year: 'numeric'
+                });
+
+                doc.content.push({
+                    margin: [0, 50, 0, 0],
+                    columns: [
+                        {
+                            width: '*',
+                            alignment: 'left',
+                            margin: [30, 0, 0, 0], // geser sedikit ke tengah
+                            stack: [
+                                { text: 'Mengetahui,', fontSize: 11 },
+                                { text: 'Kepala Dinas Koperasi, UKM, Perdagangan', fontSize: 11 },
+                                { text: 'dan Perindustrian Kabupaten Indramayu,', fontSize: 11, margin: [0, 0, 0, 60] },
+                                { text: 'ESMEGA, ST., MT', fontSize: 11, bold: true }
+                            ]
+                        },
+                        {
+                            width: '*',
+                            alignment: 'left',
+                            margin: [90, 0, 0, 0], // geser ke kiri agar agak ke tengah
+                            stack: [
+                                { text: `Indramayu, ${formattedDate}`, fontSize: 11 },
+                                { text: 'Admin Lokalista,', fontSize: 11, margin: [0, 0, 0, 70] },
+                                { text: '(............................)', fontSize: 11, bold: true }
+                            ]
+                        }
+                    ]
+                });
+                }
                 },
                 'print'
             ]

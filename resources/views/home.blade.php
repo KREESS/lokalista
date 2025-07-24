@@ -136,7 +136,7 @@
                     {{-- PRODUK TERSEDIA --}}
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <h5 class="fw-bold text-orange" style="color:#ff7700;">PRODUK TERSEDIA</h5>
+                            <h5 class="fw-bold text-orange" style="color:#ff7700;">PRODUK TERBARU</h5>
                         </div>
                     </div>
 

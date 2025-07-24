@@ -80,11 +80,20 @@
                                         <select id="default" class="form-control @error('provinsi') is-invalid @enderror"
                                             name="provinsi">
                                             <option disabled selected>Pilih Provinsi</option>
+                                            <option value="1|DKI Jakarta">DKI Jakarta</option>
+                                            <option value="2|Jawa Barat">Jawa Barat</option>
+                                            <option value="3|Banten">Banten</option>
+                                            <option value="4|Jawa Tengah">Jawa Tengah</option>
+                                            {{-- @foreach ($provinsi as $provinsi)
+                                                <option
+                                                    value="{{ $provinsi['province_id'] . '|' . $provinsi['province'] }}">
+                                                    {{ $provinsi['province'] }}</option>
+                                            @endforeach --}}
                                             @foreach ($provinsi ?? [] as $provinsi)
-                                                <option value="{{ $provinsi['province_id'] . '|' . $provinsi['province'] }}">
-                                                    {{ $provinsi['province'] }}
-                                                </option>
-                                            @endforeach
+                                            <option value="{{ $provinsi['province_id'] . '|' . $provinsi['province'] }}">
+                                                {{ $provinsi['province'] }}
+                                            </option>
+                                        @endforeach
                                         </select>
                                         @error('provinsi')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -99,10 +108,17 @@
                                         <select id="default1" class="form-control @error('kota') is-invalid @enderror"
                                             name="kota">
                                             <option disabled selected>Pilih Kota / Kabupaten</option>
+                                            <option value="101|Jakarta Selatan">Jakarta Selatan</option>
+                                            <option value="102|Jakarta Utara">Jakarta Utara</option>
+                                            <option value="201|Bandung">Bandung</option>
+                                            <option value="202|Bekasi">Bekasi</option>
+                                            <option value="301|Tangerang">Tangerang</option>
+                                            <option value="302|Serang">Serang</option>
+                                            <option value="401|Semarang">Semarang</option>
                                             @foreach ($city ?? [] as $city)
-                                            <option value="{{ $city['city_id'] . '|' . $city['city_name'] }}">
-                                                {{ $city['city_name'] }}</option>
-                                        @endforeach
+                                                <option value="{{ $city['city_id'] . '|' . $city['city_name'] }}">
+                                                    {{ $city['city_name'] }}</option>
+                                            @endforeach
                                         </select>
                                         @error('kota')
                                             <span class="invalid-feedback">{{ $message }}</span>
