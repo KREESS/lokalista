@@ -143,7 +143,7 @@
 <input type="hidden" name="id_produk" value="{{ $produk->id_produk }}">
 
 <button type="button" class="btn btn-primary px-4 d-inline-block"
-        style="background-color: #EDA752; border: none; color: white; transition: 0.3s;"
+        style="background: linear-gradient(135deg, #f26514, #ffd014); border: none; color: white; transition: 0.3s;"
         onclick="executeExample('error')">
     <i class="mdi mdi-cart me-2"></i>Masukan Keranjang
 </button>

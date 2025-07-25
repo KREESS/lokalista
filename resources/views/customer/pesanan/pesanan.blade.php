@@ -50,6 +50,7 @@
                                         <th>Pengiriman</th>
                                         <th>Total Pembayaran</th>
                                         <th>Tipe Pembayarans</th>
+                                        <th>invoice</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -76,10 +77,23 @@
                                             <td><span
                                                     class="badge badge-soft-primary p-2">{{ Str::upper($data->tipe_pembayaran) }}</span>
                                             </td>
+                                            <td><a href="{{ route('customer.pesanan_invoice', $data->id_pesanan) }}"
+                                                target="_blank" class="btn btn-sm btn-secondary"><i
+                                                    class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
                                                 {{ $data->status }}
                                             </td>
                                             <td>
+                                                {{-- Tombol Bayar Ulang jika status pending --}}
+                                                @if($data->status === 'pending')
+                                                    <form action="{{ route('customer.pesanan.bayar_ulang', $data->id_pesanan) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-warning">
+                                                            Bayar Ulang
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            
                                                 {{-- Tombol Hapus --}}
                                                 <form action="{{ route('customer.pesanan.destroy', $data->id_pesanan) }}" method="POST" style="display:inline-block;"
                                                     onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
@@ -89,7 +103,7 @@
                                                         Hapus
                                                     </button>
                                                 </form>
-                                            </td>
+                                            </td>                                            
                                         </tr>
                                         
                                     @endforeach

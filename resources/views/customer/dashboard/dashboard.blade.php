@@ -163,11 +163,11 @@
 
 
     {{-- LIST PRODUK --}}
-    <section style="background-color: #ff770036; border-radius: 30px;">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-14">
-                    <div class="row">
+ <section style="background-color: #ff770036; border-radius: 30px;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="row">
                         @php
                             function rupiah($angka) {
                                 return 'Rp ' . number_format($angka, 2, ',', '.');
@@ -381,7 +381,7 @@
     flex-wrap: wrap;
 }
 /* === PRODUK CARD === */
-       .produk-card {
+.produk-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 16px;
     overflow: hidden;

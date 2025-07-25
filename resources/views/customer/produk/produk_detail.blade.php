@@ -80,17 +80,26 @@
     <h4 class="mt-5 mb-3 fw-bold">Komentar Teratas</h4>
     <div class="row">
         @foreach ( $komentar as $komentar)
-        <div class="col-lg-12 mb-3">
-            <div class="card shadow-sm rounded">
+        <div class="col-lg-12">
+            <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-start">
-                        <img class="rounded-circle me-3" src="assets/images/small/opp-1.png" alt="" height="50">
-                        <div>
-                            <h6 class="mb-1">{{ Str::upper($komentar->name) }}</h6>
-                            <p class="text-muted mb-0">{{ $komentar->komentar_produk }}</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="media">
+                                <img class="d-flex align-self-center me-3 rounded-circle"
+                                    src="assets/images/small/opp-1.png" alt="" height="50">
+                                <div class="media-body align-self-center">
+                                    <h4 class="mt-0 mb-1 font-15">{{ Str::upper($komentar->name) }}</h4>
+                                    <p class="text-mute">{{ $komentar->komentar_produk }}</p>
+                                </div>
+                                <!--end media-body-->
+                            </div>
+                            <!--end media-->
                         </div>
                     </div>
+                    <!--end row-->
                 </div>
+                <!--end card-body-->
             </div>
         </div>
         @endforeach

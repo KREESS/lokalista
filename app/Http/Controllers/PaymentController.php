@@ -141,4 +141,46 @@ class PaymentController extends Controller
 
         return view('customer.checkout.after_checkout');
     }
+    
+    public function bayarUlang($id)
+{
+    $pesanan = Pesanan::findOrFail($id);
+
+    // MIDTRANS CONFIG
+    Config::$serverKey = config('services.midtrans.server_key');
+    Config::$isProduction = config('services.midtrans.is_production');
+    Config::$isSanitized = true;
+    Config::$is3ds = true;
+
+    $orderId = 'ORDER-RETRY-' . time();
+    $grossAmount = $pesanan->harga_total_bayar;
+
+    $params = [
+        'transaction_details' => [
+            'order_id' => $orderId,
+            'gross_amount' => $grossAmount,
+        ],
+        'customer_details' => [
+            'first_name' => Auth::user()->name,
+            'email' => Auth::user()->email,
+        ],
+        'enabled_payments' => [
+            'credit_card', 'bca_va', 'bni_va', 'bri_va', 'qris', 'gopay', 'shopeepay',
+            'permata_va', 'echannel', 'indomaret', 'alfamart',
+        ],
+    ];
+
+    $snapToken = Snap::createTransaction($params)->token;
+
+    return view('customer.checkout.checkout_ulang', [
+        'snapToken' => $snapToken,
+        'pesanan' => collect([$pesanan]), // biar konsisten array
+        'keranjang' => [], // Tidak perlu keranjang di ulang bayar
+        'berat_total' => 0,
+        'ongkir' => $pesanan->total_ongkir,
+        'pengiriman' => 'Ulang Bayar',
+        'id_pesanan' => $pesanan->id_pesanan,
+    ]);
+}
+
 }

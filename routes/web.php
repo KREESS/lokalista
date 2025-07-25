@@ -157,6 +157,8 @@ Route::middleware(['auth', 'user-access:customer'])->group(function () {
     Route::post('/midtrans/callback', [PaymentController::class, 'handleMidtransCallback']);
     Route::post('/checkout/proses', [PaymentController::class, 'proses'])->name('checkout.proses');
     Route::any('/checkout/sukses', [PaymentController::class, 'updateStatusPembayaran'])->name('checkout.sukses');
+    Route::post('/pesanan/bayar-ulang/{id}', [PaymentController::class, 'bayarUlang'])->name('customer.pesanan.bayar_ulang');
+
 });
 
 

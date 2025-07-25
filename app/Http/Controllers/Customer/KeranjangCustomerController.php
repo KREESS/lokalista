@@ -43,18 +43,31 @@ class KeranjangCustomerController extends Controller
     }
 
     public function checkout($id_keranjang)
-{
-    $keranjang = Keranjang::find($id_keranjang);
-
-    // Logika simpan ke pesanan, kurangi stok, dll...
-
-    // Update status jadi 'dibayar'
-    $keranjang->update([
-        'status' => 'dibayar'
-    ]);
-
-    return redirect()->route('customer.keranjang')->with('success', 'Berhasil checkout!');
-}
+    {
+        $keranjang = Keranjang::find($id_keranjang);
+    
+        if (!$keranjang) {
+            return redirect()->route('customer.keranjang')->with('gagal', 'Data keranjang tidak ditemukan');
+        }
+    
+        // Kurangi stok produk
+        $produk = Produk::find($keranjang->id_produk);
+        if ($produk->stok < $keranjang->quantity) {
+            return back()->with('gagal', 'Stok produk tidak mencukupi untuk checkout');
+        }
+    
+        $produk->stok -= $keranjang->quantity;
+        $produk->save();
+    
+        // Simpan ke tabel pesanan, dsb... (jika ada)
+        // Pesanan::create([...]);
+    
+        // Hapus dari keranjang setelah checkout
+        $keranjang->delete();
+    
+        return redirect()->route('customer.keranjang')->with('success', 'Berhasil checkout!');
+    }
+    
 
     
 

@@ -426,7 +426,7 @@
         font-size: 13px;
     }
 }
-@@media (max-width: 576px) {
+@media (max-width: 576px) {
     .footer-flex-top {
         display: flex;
         justify-content: space-between;

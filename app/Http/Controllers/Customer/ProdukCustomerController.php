@@ -23,18 +23,20 @@ class ProdukCustomerController extends Controller
 
     public function detail_produk($id)
     {
-        $produk = Produk::join('kategori','kategori.id_kategori','=','produk.id_kategori')
-            ->select('produk.*','kategori.nama_kategori')
-            ->find($id);
+        $produk = Produk::join('kategori', 'kategori.id_kategori', '=', 'produk.id_kategori')
+        ->select('produk.*', 'kategori.nama_kategori')
+        ->find($id);
 
-        $komentar = Komentar::join('produk','produk.id_produk','=','komentar.id_produk')
-            ->join('users','users.id','=','komentar.id_user')
-            ->select('komentar.*','users.name','users.foto_profile')
-            ->limit(3)
-            ->get();
+    $komentar = Komentar::join('produk', 'produk.id_produk', '=', 'komentar.id_produk')
+        ->join('users', 'users.id', '=', 'komentar.id_user')
+        ->select('komentar.*', 'users.name', 'users.foto_profile')
+        ->where('komentar.id_produk', $id)
+        ->limit(3)
+        ->get();
 
         return view('customer.produk.produk_detail', compact(['produk','komentar']));
     }
+
 
     public function search_kategori($id)
     {
