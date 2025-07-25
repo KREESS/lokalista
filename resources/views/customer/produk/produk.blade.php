@@ -14,6 +14,25 @@
         .produk-card:hover .produk-img {
             transform: scale(1.1);
         }
+
+        /* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .produk-card img {
+        height: 140px;
+    }
+    .produk-card .card-body {
+        padding: 12px;
+    }
+    .produk-card .btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    .produk-card .card-body p,
+    .produk-card .card-body a,
+    .produk-card .card-body h5 {
+        font-size: 13px;
+    }
+}
         .kategori-link {
             color: goldenrod;
             font-size: 15px;
@@ -96,8 +115,8 @@
                     @endphp
 
                     @foreach ($produk as $data)
-                        <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                            <div class="card produk-card shadow-sm rounded-lg border-0 w-100">
+                    <div class="col-6 col-md-3 mb-3 d-flex align-items-stretch">
+                        <div class="card produk-card shadow-sm rounded-lg border-0 w-100" style="border-radius: 30px;">
                                 <div class="overflow-hidden rounded-top">
                                     <img src="/produk/{{ $data->foto_produk }}" alt="" class="card-img-top produk-img" height="180">
                                 </div>

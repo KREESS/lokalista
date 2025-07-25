@@ -140,6 +140,60 @@
     </div>
 @endsection
 
+
+@section('css')
+<style>
+    /* === Responsive Table Wrapper === */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+        padding: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        font-size: 14px;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-transform: capitalize;
+        color: #333;
+    }
+
+    .table img {
+        width: 40px;
+        height: auto;
+        margin-right: 10px;
+    }
+
+    .table .form-control {
+        width: 100px !important;
+    }
+
+    .table .btn-sm {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+
+</style>
+@endsection
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- <script>

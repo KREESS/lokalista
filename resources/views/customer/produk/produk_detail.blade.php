@@ -66,7 +66,7 @@
                                     <div class="d-flex align-items-center mb-3">
                                         <input class="form-control me-3" style="width:100px;" type="number" name="quantity" min="1" value="1" max="{{ $produk->stok }}">
                                         <input type="hidden" name="id_produk" value="{{ $produk->id_produk }}">
-                                        <button type="submit" class="btn btn-primary px-4"  style="background-color: #EDA752; border: none; color: white; transition: 0.3s;"><i class="mdi mdi-cart me-2" ></i>Masukan Keranjang</button>
+                                        <button type="submit" class="btn btn-primary px-4"  style="background: linear-gradient(135deg, #f26514, #ffd014); border: none; color: white; transition: 0.3s;"><i class="mdi mdi-cart me-2" ></i>Masukan Keranjang</button>
                                     </div>
                                 </form>
                             </div>

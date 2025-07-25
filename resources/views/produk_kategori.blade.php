@@ -2,42 +2,61 @@
 
 @section('content')
 <style>
-    .produk-card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        transition: 0.3s ease-in-out;
+.produk-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease-in-out;
+        }
+        .produk-img {
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .produk-card:hover .produk-img {
+            transform: scale(1.1);
+        }
+
+        /* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .produk-card img {
+        height: 140px;
     }
-    .produk-img {
-        object-fit: cover;
-        transition: transform 0.3s ease;
+    .produk-card .card-body {
+        padding: 12px;
     }
-    .produk-card:hover .produk-img {
-        transform: scale(1.1);
+    .produk-card .btn {
+        font-size: 13px;
+        padding: 6px 10px;
     }
-    .kategori-link {
-        color: goldenrod;
-        font-size: 15px;
-        display: block;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: 0.3s;
-        text-decoration: none;
+    .produk-card .card-body p,
+    .produk-card .card-body a,
+    .produk-card .card-body h5 {
+        font-size: 13px;
     }
-    .kategori-link:hover {
-        background-color: #ffe8a1;
-        color: #c08000;
-    }
-    .btn-lihat {
-        background: linear-gradient(45deg, #ffa500, #ffcc00);
-        border: none;
-        color: #fff;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .btn-lihat:hover {
-        background: linear-gradient(45deg, #ffcc00, #ffa500);
-        color: #fff;
-    }
+}
+        .kategori-link {
+            color: goldenrod;
+            font-size: 15px;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .kategori-link:hover {
+            background-color: #ffe8a1;
+            color: #c08000;
+        }
+        .btn-lihat {
+            background: linear-gradient(45deg, #ffa500, #ffcc00);
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-lihat:hover {
+            background: linear-gradient(45deg, #ffcc00, #ffa500);
+            color: #fff;
+        }
 </style>
 
 <div class="container-fluid">
@@ -94,8 +113,8 @@
                 @endphp
 
                 @forelse ($produk as $data)
-                    <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                        <div class="card produk-card shadow-sm rounded-lg border-0 w-100">
+                <div class="col-6 col-md-3 mb-3 d-flex align-items-stretch">
+                    <div class="card produk-card shadow-sm rounded-lg border-0 w-100" style="border-radius: 30px;">
                             <div class="overflow-hidden rounded-top">
                                 <img src="/produk/{{ $data->foto_produk }}" alt="" class="card-img-top produk-img" height="180">
                             </div>

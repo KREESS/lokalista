@@ -150,7 +150,8 @@
                     alignment: 'center',
                     margin: [0, 0, 0, 10],
                     stack: [
-                        { text: 'KOPERASI UMKM INDRAMAYU', fontSize: 16, bold: true },
+                        { text: 'DINAS KOPERASI, USAHA KECIL DAN MENENGAH,', fontSize: 16, bold: true },
+                        { text: 'PERDAGANGAN DAN PERINDUSTRIAN', fontSize: 16, bold: true},
                         { text: 'Jl. MT Haryono No. 11/B - Sindang, Indramayu', fontSize: 10 },
                         { text: 'Telp: (021) 1234567 | Email: info@koperasims.id', fontSize: 10 },
                         {
@@ -226,7 +227,7 @@
                             margin: [30, 0, 0, 0], // geser sedikit ke tengah
                             stack: [
                                 { text: 'Mengetahui,', fontSize: 11 },
-                                { text: 'Kepala Dinas Koperasi, UKM, Perdagangan', fontSize: 11 },
+                                { text: 'Plt. Kepala Dinas Koperasi, UKM, Perdagangan', fontSize: 11 },
                                 { text: 'dan Perindustrian Kabupaten Indramayu,', fontSize: 11, margin: [0, 0, 0, 60] },
                                 { text: 'ESMEGA, ST., MT', fontSize: 11, bold: true }
                             ]
